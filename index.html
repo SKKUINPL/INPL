@@ -67,7 +67,7 @@
     @media (min-width:700px){.card.sm-6{grid-column:span 6}.card.sm-4{grid-column:span 4}.card.sm-3{grid-column:span 3}}
 
     .member{display:flex;gap:16px;align-items:center}
-    .member img{height:150px;aspect-ratio:3/5;width:auto;border-radius:14px;object-fit:cover;border:1px solid var(--border)}
+    .member img{height:150px;aspect-ratio:3/4;width:auto;border-radius:14px;object-fit:cover;border:1px solid var(--border)}
     .member h3{margin:0 0 4px;font-size:1.05rem}
     .member .role{font-size:.9rem;color:var(--muted)}
     .badge{display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:999px;font-size:.75rem;color:var(--muted);margin-right:6px;margin-top:6px}
@@ -115,6 +115,8 @@
     .meta-list li{margin:4px 0}
       /* anchor offset for fixed header */
     section{scroll-margin-top:100px}
+    /* ensure hidden attribute actually hides panels despite grid display */
+    [hidden]{display:none !important;}
   </style>
 </head>
 <body>
@@ -472,13 +474,19 @@
       btn.addEventListener('click', ()=>{
         const section = btn.closest('section');
         const targetId = btn.dataset.target;
-        btn.parentElement.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+        // toggle active + aria-selected within this tabs group only
+        btn.parentElement.querySelectorAll('.tab').forEach(b=>{
+          b.classList.remove('active');
+          b.setAttribute('aria-selected','false');
+        });
         btn.classList.add('active');
+        btn.setAttribute('aria-selected','true');
+        // determine which panel set to use
         const peoplePanels = section.querySelectorAll('.people-panel');
         const newsPanels = section.querySelectorAll('.news-panel');
         const panels = peoplePanels.length ? peoplePanels : newsPanels;
         panels.forEach(panel=>{
-          if(panel.id === targetId){ panel.hidden = false; } else { panel.hidden = true; }
+          panel.hidden = panel.id !== targetId;
         });
       });
     });
