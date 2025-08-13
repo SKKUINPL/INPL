@@ -10,9 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Serif+KR:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#0b0f14; --text:#e6e6e6; --muted:#a0a0a0; --card:#11161d; --border:#1f2937; --accent:#16a34a; --accent-2:#22c55e; --link:#7dd3fc;
-    }
+    :root { --bg:#0b0f14; --text:#e6e6e6; --muted:#a0a0a0; --card:#11161d; --border:#1f2937; --accent:#16a34a; --accent-2:#22c55e; --link:#7dd3fc; --brand:#1e40af; }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
     body{margin:0;font-family:"Noto Sans KR","Inter",system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:linear-gradient(180deg,#0b0f14 0%,#0b0f14 40%,#0c1118 100%);color:var(--text);line-height:1.6}
@@ -49,7 +47,7 @@
     .hero{position:relative;padding:180px 0 120px;min-height:90vh;background:url('background.png') center/cover no-repeat} 
     .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(4,8,12,.65));}
     .hero > *{position:relative;z-index:1}
-    .hero .title{font-family:'Inter','Noto Sans KR',sans-serif;font-size:clamp(44px,7.5vw,96px);line-height:1.1;margin:0 0 18px;font-weight:900;color:#fff}
+    .hero .title{font-family:'Inter','Noto Sans KR',sans-serif;font-size:clamp(40px,6.5vw,84px);line-height:1.1;margin:0 0 18px;font-weight:900;color:#fff}
     .hero .subtitle{color:var(--muted);max-width:900px}
     .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
     .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#04110a;padding:10px 16px;border-radius:12px;font-weight:800;border:1px solid #14532d}
@@ -105,7 +103,7 @@
     .small-muted{font-size:.85rem;color:var(--muted)}
     .marker{display:inline-block; padding:2px 8px; border-radius:6px; background:rgba(125,211,252,.12); border:1px solid #164e63; color:#a5f3fc; font-size:.8rem; font-weight:700}
       /* Hero overrides: kicker bigger & white */
-    .hero .kicker{color:#fff;font-size:clamp(18px,2.4vw,28px);letter-spacing:.14em;font-weight:900;font-family:'Inter','Noto Sans KR',sans-serif}
+    .hero .kicker{color:#fff;font-size:clamp(20px,3vw,32px);letter-spacing:.14em;font-weight:900;font-family:'Inter','Noto Sans KR',sans-serif}
       /* Professor layout */
     .profile-grid{display:grid;gap:20px;grid-template-columns:1.2fr .8fr;align-items:start}
     @media (max-width: 900px){.profile-grid{grid-template-columns:1fr}}
@@ -132,6 +130,12 @@
     .welcome-grid{display:grid;gap:24px;grid-template-columns:.9fr 1.1fr;align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
     .welcome-logo{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+      /* Welcome heading style like sample */
+    .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:2rem;font-weight:900;color:var(--ink)}
+    .welcome-title::before{content:"";position:absolute;left:0;top:.1em;bottom:.1em;width:5px;background:#1e40af;border-radius:2px}
+    .welcome-grid{display:grid;gap:24px;grid-template-columns:220px minmax(0,1fr);align-items:center}
+    @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
+    .welcome-logo{width:100%;max-width:180px;height:auto;display:block;margin:0 auto}
   </style>
 </head>
 <body>
@@ -161,16 +165,16 @@
   <main id="main">
     <section id="home" class="hero"><div class="container">
       <p class="kicker">성균관대학교</p>
-      <h2 class="title">집적신경보철연구실 (INPL)</h2>
+      <h2 class="title">집적신경보철연구실<\/h2>
     </div>
     </section>
 
     <!-- Welcome Section -->
-    <section id="welcome" class="section container light">
-      <h2>Welcome</h2>
+    <section id="welcome" class="section light"><div class="container">
+      <h2 class="welcome-title">Welcome</h2>
       <div class="welcome-grid">
         <div class="welcome-left">
-          <img src="inpllogo.png" alt="INPL 로고" class="welcome-logo">
+          <img src="inpllogo2.png" alt="INPL 로고" class="welcome-logo">
         </div>
         <div class="welcome-right">
           <p class="lead">성균관대학교 집적신경보철연구실 방문을 환영합니다.</p>
@@ -182,10 +186,11 @@
           </div>
         </div>
       </div>
+    </div>
     </section>
 
     <!-- Professor Section -->
-    <section id="professor" class="section container muted">
+    <section id="professor" class="section muted"><div class="container">
       <h2>Professor</h2>
       <div class="profile-grid">
         <div class="profile-left">
@@ -229,9 +234,10 @@
           <div class="small-muted">E-mail: <a href="mailto:hangue.park@skku.edu">hangue.park@skku.edu</a></div>
         </aside>
       </div>
+    </div>
     </section>
 
-    <section id="people" class="section container light">
+    <section id="people" class="section light"><div class="container">
       <h2>People</h2>
       <p class="lead">Graduate students, Undergraduate students, Alumni</p>
 
@@ -359,7 +365,7 @@
 
     </section>
 
-        <section id="research" class="section container muted">
+        <section id="research" class="section muted"><div class="container">
       <h2>Current Research</h2>
       <p class="lead">연구 주제 (예시) — 자유롭게 수정 및 확장하세요.</p>
       <div class="grid cards">
@@ -400,9 +406,10 @@
           </ul>
         </div>
       </div>
+    </div>
     </section>
 
-    <section id="publications" class="section container light">
+    <section id="publications" class="section light"><div class="container">
       <h2>Publications</h2>
       <div class="search">
         <input id="pubSearch" type="search" placeholder="키워드로 검색 (저자, 제목, 저널, 연도)">
@@ -422,9 +429,10 @@
         </div>
       </div>
       <p class="small-muted">※ 위 항목은 예시입니다. 실제 목록으로 자유롭게 교체하세요.</p>
+    </div>
     </section>
 
-<section id="news" class="section container muted">
+<section id="news" class="section muted"><div class="container">
       <h2>INPL News</h2>
       <div class="tabs" role="tablist" aria-label="뉴스 분류">
         <button class="tab active" role="tab" aria-selected="true" data-target="headline">Headline</button>
@@ -483,6 +491,7 @@
         </div>
       </div>
 
+    </div>
     </section>
 
   </main>
