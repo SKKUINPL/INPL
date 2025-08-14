@@ -209,24 +209,27 @@
 }
 /* 섹션 타이틀(Professor, People, …) 바-텍스트 겹침 해결 */
 .section h2{
-  margin-top: 150px;
+  margin-top: 70px;        /* ← 오프셋은 제목에만 */
   position: relative;
-  padding-left: 22px;   /* ← 바(5~6px) + 여백(14~16px) 정도로 넉넉히 */
+  padding-left: 22px;       /* 바(6px) + 여백 */
   font-size: 3rem;
   font-weight: 900;
-  line-height: 1.2;     /* 글자 높이 안정화(선택) */
+  line-height: 1.2;
 }
 
 .section h2::before{
-  margin-top: 150px;
   content: "";
   position: absolute;
   left: 0;
-  top: .15em;           /* 바의 위아래도 살짝 여유 */
+  top: .15em;               /* h2 내부 위아래 여유 */
   bottom: .15em;
-  width: 6px;           /* 바 조금 굵게(원하면 5px로 유지) */
-  background: #1e40af;  /* 원하시는 파란색 */
+  width: 6px;
+  background: #1e40af;
   border-radius: 2px;
+  display: block;           /* 안전하게 블록화 */
+}
+.section#welcome h2 {
+  margin-top: 0;
 }
 /* Welcome 그리드: 상단-상단 정렬 + 아래 안내는 두 칸 전체 */
 #welcome .welcome-grid{
