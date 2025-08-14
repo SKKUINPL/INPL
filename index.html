@@ -282,38 +282,34 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
   padding: 0;                     /* 여백 제거 */
 }
 
-/* 세로로 긴 큰 사진 스타일 */
-#professor .prof-photo{
-  width: 100%;
-  height: auto;
-  aspect-ratio: 3 / 4;            /* 세로형 비율(원하면 2/3 등으로 조정 가능) */
-  object-fit: cover;
-  border-radius: 12px;
-  border: 1px solid var(--border-light); /* 라이트 섹션에 어울리는 옅은 테두리 */
-}
-#prof-hankyu {
-  border: none !important; /* 박한규 교수 사진은 테두리 없음 */
-}
-    /* 1) Professor 레이아웃: 오른쪽 칼럼을 고정 폭으로 제한 */
+/* Professor 오른쪽 사진 칼럼 고정폭 유지 */
 #professor .profile-grid{
-  grid-template-columns: 1fr 360px;  /* 오른쪽 칼럼을 360px로 고정 */
+  grid-template-columns: 1fr 360px;
 }
-
-/* 모바일에서는 한 칼럼 */
 @media (max-width: 900px){
   #professor .profile-grid{ grid-template-columns: 1fr; }
 }
 
-/* 2) 사진 크기 제한 (너비/높이 과도 확대 방지) */
-#professor .prof-photo{
+/* 사진 컨테이너 정렬 */
+#professor .prof-photo-only{
+  justify-self: end;   /* 오른쪽 끝 정렬 (원하면 center/end 조절) */
+  align-self: start;
+}
+
+/* 실제 이미지에 직접 적용: 크기 제한 */
+#professor .prof-photo-only img,
+#prof-hangue{
   width: 100%;
-  max-width: 360px;      /* 칼럼 폭과 맞춤 */
-  height: auto;          /* 세로는 비율대로 */
+  max-width: 360px;    /* ← 여기만 바꾸면 크기 조절 가능 */
+  height: auto;
+  display: block;
   object-fit: cover;
   border-radius: 12px;
-  border: 1px solid var(--border-light);
-  display: block;
-  margin-left: auto;     /* 오른쪽 정렬 느낌(원하면 제거) */
+}
+
+/* 테두리 없애기(이미 넣으신 규칙 유지) */
+#prof-hangue{
+  border: none !important;
 }
 
   </style>
@@ -419,7 +415,7 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
           </div>
         </div>
 <div class="prof-photo-only">
-  <img id="prof-hankyu" src="PI.png" alt="박한규 교수 사진">
+  <img id="prof-hangue" src="PI.png" alt="박한규 교수 사진">
 </div>
       </div>
     </div>
@@ -732,7 +728,7 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
   <footer class="container">
     <hr class="sep">
     <p><strong>INPL · Integrated Neuro‑prosthesis Laboratory</strong></p>
-    <p class="small">성균관대학교 글로벌바이오메디컬공학과, 메타바이오헬스학과, 지능형정밀헬스케어융합전공 · <span class="small-muted">E-mail: <a href="mailto:hangue.park@skku.edu">hangue.park@skku.edu</a></span></p>
+    <p class="small">성균관대학교 글로벌바이오메디컬공학과, 메타바이오헬스학과, 지능형정밀헬스케어융합전공<br><span class="small-muted">E-mail: <a href="mailto:hangue.park@skku.edu">hangue.park@skku.edu</a></span></p>
     
     <p class="small-muted">© <span id="year"></span> INPL. All rights reserved.</p>
   </footer>
