@@ -144,7 +144,7 @@
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
     .welcome-logo{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
       /* Welcome heading style like sample */
-    .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:2.5rem;font-weight:900;color:var(--ink)}
+    .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:3rem;font-weight:900;color:var(--ink)}
 .welcome-title::before{
   content:"";
   position:absolute;
@@ -160,7 +160,7 @@
 .section h2{
   position:relative;
   padding-left:14px
-    font-size: 2.5rem; /* 크기 키움 */
+    font-size: 3rem; /* 크기 키움 */
   font-weight: 900;; /* 바만큼 들여쓰기 */
 }
 
@@ -177,6 +177,56 @@
     padding-top: 120px; /* 모바일에서는 적당히 */
   }
 }
+    /* === Welcome 섹션 레이아웃/크기 조정 (override) === */
+#welcome .welcome-grid{
+  /* 로고 영역 넓히고(=텍스트 더 오른쪽으로 밀기), 간격도 키움 */
+  grid-template-columns: 420px minmax(0,1fr); /* 기존 220px → 420px */
+  gap: 40px; /* 기존 24px → 40px */
+}
+
+#welcome .welcome-logo{
+  /* 로고를 훨씬 크게 */
+  width: 100%;
+  max-width: 380px; /* 필요하면 420~480px까지 올려도 됨 */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 로고 칼럼을 가운데 정렬(미관용, 선택사항) */
+#welcome .welcome-left{ justify-self: center; }
+
+/* 텍스트 컬럼에 살짝 여백(선택사항) */
+#welcome .welcome-right{ padding-left: 8px; }
+
+/* 모바일에서는 기존처럼 1열로 정리 */
+@media (max-width: 900px){
+  #welcome .welcome-grid{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  #welcome .welcome-right{ padding-left: 0; }
+}
+/* 섹션 타이틀(Professor, People, …) 바-텍스트 겹침 해결 */
+.section h2{
+  position: relative;
+  padding-left: 22px;   /* ← 바(5~6px) + 여백(14~16px) 정도로 넉넉히 */
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.2;     /* 글자 높이 안정화(선택) */
+}
+
+.section h2::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .15em;           /* 바의 위아래도 살짝 여유 */
+  bottom: .15em;
+  width: 6px;           /* 바 조금 굵게(원하면 5px로 유지) */
+  background: #1e40af;  /* 원하시는 파란색 */
+  border-radius: 2px;
+}
+
   </style>
 </head>
 <body>
