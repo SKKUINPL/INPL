@@ -103,7 +103,19 @@
     .small-muted{font-size:.85rem;color:var(--muted)}
     .marker{display:inline-block; padding:2px 8px; border-radius:6px; background:rgba(125,211,252,.12); border:1px solid #164e63; color:#a5f3fc; font-size:.8rem; font-weight:700}
       /* Hero overrides: kicker bigger & white */
-    .hero .kicker{color:#fff;font-size:clamp(20px,3vw,32px);letter-spacing:.14em;font-weight:900;font-family:'Inter','Noto Sans KR',sans-serif}
+    .hero .kicker{color:#fff;font-size:clamp(20px,3vw,32px);letter-spacing:.14em;font-weight:400;font-family:'Inter','Noto Sans KR',sans-serif}
+    .hero-underline {
+  width: 80px;
+  height: 2px;
+  background-color: #fff;
+  margin: 10px 0 12px;
+}
+
+.hero-subtitle {
+  color: var(--muted);
+  font-size: 1.2rem;
+  font-weight: 400;
+}
       /* Professor layout */
     .profile-grid{display:grid;gap:20px;grid-template-columns:1.2fr .8fr;align-items:start}
     @media (max-width: 900px){.profile-grid{grid-template-columns:1fr}}
@@ -131,11 +143,34 @@
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
     .welcome-logo{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
       /* Welcome heading style like sample */
-    .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:2rem;font-weight:900;color:var(--ink)}
-    .welcome-title::before{content:"";position:absolute;left:0;top:.1em;bottom:.1em;width:5px;background:#1e40af;border-radius:2px}
+    .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:2.5rem;font-weight:900;color:var(--ink)}
+.welcome-title::before{
+  content:"";
+  position:absolute;
+  left:0; top:.1em; bottom:.1em;
+  width:5px;
+  background:var(--accent); /* 초록 포인트 색상 */
+  border-radius:2px;
+}
     .welcome-grid{display:grid;gap:24px;grid-template-columns:220px minmax(0,1fr);align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
     .welcome-logo{width:100%;max-width:180px;height:auto;display:block;margin:0 auto}
+    /* 모든 섹션 h2 왼쪽에 동일한 초록 바 추가 */
+.section h2{
+  position:relative;
+  padding-left:14px
+    font-size: 2.5rem; /* 크기 키움 */
+  font-weight: 900;; /* 바만큼 들여쓰기 */
+}
+
+.section h2::before{
+  content:"";
+  position:absolute;
+  left:0; top:.1em; bottom:.1em;
+  width:5px;
+  background:var(--accent); /* 초록 포인트 */
+  border-radius:2px;
+}
   </style>
 </head>
 <body>
@@ -166,6 +201,8 @@
     <section id="home" class="hero"><div class="container">
       <p class="kicker">성균관대학교</p>
       <h2 class="title">집적신경보철연구실</h2>
+      <div class="hero-underline"></div>
+      <p class="hero-subtitle">Integrated Neuro-Prosthesis Lab. at SKKU</p>
     </div>
     </section>
 
