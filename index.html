@@ -294,6 +294,28 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
 #prof-hankyu {
   border: none !important; /* 박한규 교수 사진은 테두리 없음 */
 }
+    /* 1) Professor 레이아웃: 오른쪽 칼럼을 고정 폭으로 제한 */
+#professor .profile-grid{
+  grid-template-columns: 1fr 360px;  /* 오른쪽 칼럼을 360px로 고정 */
+}
+
+/* 모바일에서는 한 칼럼 */
+@media (max-width: 900px){
+  #professor .profile-grid{ grid-template-columns: 1fr; }
+}
+
+/* 2) 사진 크기 제한 (너비/높이 과도 확대 방지) */
+#professor .prof-photo{
+  width: 100%;
+  max-width: 360px;      /* 칼럼 폭과 맞춤 */
+  height: auto;          /* 세로는 비율대로 */
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid var(--border-light);
+  display: block;
+  margin-left: auto;     /* 오른쪽 정렬 느낌(원하면 제거) */
+}
+
   </style>
 </head>
 <body>
