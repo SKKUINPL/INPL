@@ -18,10 +18,8 @@
     a:hover{text-decoration:underline}
     .container{max-width:1200px;margin:0 auto;padding:0 20px}
 
-    /* 헤더는 전체 너비 + 좌우 패딩 제거로 로고/메뉴를 화면 가장자리로 붙임 */
     header .container{max-width:100%;padding-left:0;padding-right:0}
     .header-inner{padding-left:0;padding-right:0}
-    /* 메뉴를 우측 끝으로 */
     header .actions{margin-left:auto}
     header nav ul{justify-content:flex-end}
 
@@ -36,19 +34,18 @@
     nav a{padding:8px 12px;border-radius:999px;border:1px solid transparent;color:#fff}
     nav a:hover{border-color:transparent;background:rgba(255,255,255,.08);color:#fff}
     .menu-toggle{display:none}
+    
     @media (max-width: 860px){
       nav{display:none}
       nav.open{display:block}
       nav ul{flex-direction:column;padding:12px 0}
       .menu-toggle{display:inline-flex;align-items:center;gap:8px;background:#0f1621;border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px}
-      .brand h1{display:none}
-    }
+      .brand h1{display:none}}
 
     .hero{position:relative;padding:180px 0 120px;min-height:90vh;background:url('background.png') center/cover no-repeat} 
     .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(4,8,12,.65));}
     .hero > *{position:relative;z-index:1}
-    .hero .title{
-      font-family:'Inter','Noto Sans KR',sans-serif;font-size:clamp(40px,6.5vw,84px);line-height:1.1;margin:0 0 18px;font-weight:900;color:#fff}
+    .hero .title{font-family:'Inter','Noto Sans KR',sans-serif;font-size:clamp(40px,6.5vw,84px);line-height:1.1;margin:0 0 18px;font-weight:900;color:#fff}
     .hero .subtitle{color:var(--muted);max-width:900px}
     .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
     .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#04110a;padding:10px 16px;border-radius:12px;font-weight:800;border:1px solid #14532d}
@@ -103,32 +100,23 @@
 
     .small-muted{font-size:.85rem;color:var(--muted)}
     .marker{display:inline-block; padding:2px 8px; border-radius:6px; background:rgba(125,211,252,.12); border:1px solid #164e63; color:#a5f3fc; font-size:.8rem; font-weight:700}
-      /* Hero overrides: kicker bigger & white */
-    .hero .kicker{margin-top: 150px; /* 글씨 블록만 아래로 */color:#fff;font-size:clamp(20px,3vw,32px);letter-spacing:.14em;font-weight:400;font-family:'Inter','Noto Sans KR',sans-serif}
-    .hero-underline {margin-top: 50px;
-  width: 150px;
-  height: 3.5px;
-  background-color: #fff;
-  margin: 10px 0 12px;
-}
 
-.hero-subtitle {
-  color: var(--muted);
-  font-size: 1.2rem;
-  font-weight: 400;
-}
-      /* Professor layout */
+    .hero .kicker{margin-top: 150px; color:#fff;font-size:clamp(20px,3vw,32px);letter-spacing:.14em;font-weight:400;font-family:'Inter','Noto Sans KR',sans-serif}
+    .hero-underline {margin-top: 50px;width: 150px; height: 3.5px; background-color: #fff; margin: 10px 0 12px;}
+
+    .hero-subtitle {color: var(--muted); font-size: 1.2rem; font-weight: 400;}
+
     .profile-grid{display:grid;gap:20px;grid-template-columns:1.2fr .8fr;align-items:start}
     @media (max-width: 900px){.profile-grid{grid-template-columns:1fr}}
     .prof-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px}
     .prof-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:12px;border:1px solid var(--border)}
     .meta-list{padding-left:18px;margin:6px 0 0 0}
     .meta-list li{margin:4px 0}
-      /* anchor offset for fixed header */
+
     section{scroll-margin-top:100px}
-    /* ensure hidden attribute actually hides panels despite grid display */
+
     [hidden]{display:none !important;}
-      /* Light/Muted section themes */
+
     :root{--ink:#111827;--ink-muted:#6b7280;--bg-light:#ffffff;--bg-muted:#f6f8fb;--border-light:#e5e7eb}
     .section.light{background:var(--bg-light);color:var(--ink);border-top:1px solid var(--border-light)}
     .section.muted{background:var(--bg-muted);color:var(--ink);border-top:1px solid var(--border-light)}
@@ -139,27 +127,27 @@
     .section.light .tabs .tab,.section.muted .tabs .tab{background:#f3f4f6;border:1px solid var(--border-light);color:var(--ink)}
     .section.light .tab.active,.section.muted .tab.active{background:var(--accent);color:#04110a;border-color:#14532d}
     .section.light .badge,.section.muted .badge{background:#f9fafb;border:1px solid var(--border-light);color:var(--ink-muted)}
-      /* Welcome layout */
+
     .welcome-grid{display:grid;gap:24px;grid-template-columns:.9fr 1.1fr;align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
-      /* Welcome heading style like sample */
+
     .welcome-title{position:relative;padding-left:14px;margin:0 0 16px;font-size:3rem;font-weight:900;color:var(--ink)}
 .welcome-title::before{
   content:"";
   position:absolute;
   left:0; top:.1em; bottom:.1em;
   width:5px;
-  background:var(--accent); /* 초록 포인트 색상 */
+  background:var(--accent);
   border-radius:2px;
 }
     .welcome-grid{display:grid;gap:24px;grid-template-columns:220px minmax(0,1fr);align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
-    /* 모든 섹션 h2 왼쪽에 동일한 초록 바 추가 */
+
 .section h2{
   position:relative;
   padding-left:14px
-    font-size: 3rem; /* 크기 키움 */
-  font-weight: 900;; /* 바만큼 들여쓰기 */
+    font-size: 3rem;
+  font-weight: 900;; 
 }
 
 .section h2::before{
@@ -167,41 +155,25 @@
   position:absolute;
   left:0; top:.1em; bottom:.1em;
   width:5px;
-  background:var(--accent); /* 초록 포인트 */
+  background:var(--accent);
   border-radius:2px;
 }
     @media (max-width: 768px) {
   .hero .container {
-    padding-top: 120px; /* 모바일에서는 적당히 */
+    padding-top: 120px; 
   }
 }
-    /* === Welcome 섹션 레이아웃/크기 조정 (override) === */
-#welcome .welcome-grid{
-  /* 로고 영역 넓히고(=텍스트 더 오른쪽으로 밀기), 간격도 키움 */
-  grid-template-columns: 420px minmax(0,1fr); /* 기존 220px → 420px */
-  gap: 40px; /* 기존 24px → 40px */
-}
 
-
-/* 로고 칼럼을 가운데 정렬(미관용, 선택사항) */
+#welcome .welcome-grid{grid-template-columns: 420px minmax(0,1fr); gap: 40px; }
 #welcome .welcome-left{ justify-self: center; }
-
-/* 텍스트 컬럼에 살짝 여백(선택사항) */
 #welcome .welcome-right{ padding-left: 8px; }
 
-/* 모바일에서는 기존처럼 1열로 정리 */
-@media (max-width: 900px){
-  #welcome .welcome-grid{
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  #welcome .welcome-right{ padding-left: 0; }
-}
-/* 섹션 타이틀(Professor, People, …) 바-텍스트 겹침 해결 */
+@media (max-width: 900px){ #welcome .welcome-grid{ grid-template-columns: 1fr;gap: 16px;} #welcome .welcome-right{ padding-left: 0; }}
+
 .section h2{
-  margin-top: 70px;        /* ← 오프셋은 제목에만 */
+  margin-top: 70px; 
   position: relative;
-  padding-left: 22px;       /* 바(6px) + 여백 */
+  padding-left: 22px;
   font-size: 3rem;
   font-weight: 900;
   line-height: 1.2;
@@ -211,44 +183,41 @@
   content: "";
   position: absolute;
   left: 0;
-  top: .15em;               /* h2 내부 위아래 여유 */
+  top: .15em; 
   bottom: .15em;
   width: 6px;
   background: #1e40af;
   border-radius: 2px;
-  display: block;           /* 안전하게 블록화 */
+  display: block; 
 }
 .section#welcome h2 {
   margin-top: 0;
 }
-/* Welcome 그리드: 상단-상단 정렬 + 아래 안내는 두 칸 전체 */
+
 #welcome .welcome-grid{
-  grid-template-columns: 420px minmax(0,1fr); /* 왼쪽 넓혀서 텍스트 더 오른쪽으로 */
+  grid-template-columns: 420px minmax(0,1fr); 
   gap: 40px;
-  align-items: start; /* 로고/텍스트를 '위쪽'에 붙이기 */
+  align-items: start; 
 }
 
 #welcome .welcome-left,
 #welcome .welcome-right{
-  align-self: start; /* 각 칼럼도 위 정렬 */
+  align-self: start; 
 }
 
-/* 모집 안내가 아래에서 두 칸 전체 차지 */
 #welcome .welcome-alert{
   grid-column: 1 / -1;
-  margin-top: 8px;  /* 위와 간격 */
+  margin-top: 8px; 
 }
 
-/* 로고 더 크게 (원하면 max-width 숫자만 조절) */
 #welcome .welcome-logo{
   width: 100%;
-  max-width: 420px; /* 380~480px 사이로 취향대로 */
+  max-width: 420px; 
   height: auto;
   display: block;
   margin-top: 50px;
 }
 
-/* 모바일에서는 1열로 깔끔하게 */
 @media (max-width: 900px){
   #welcome .welcome-grid{
     grid-template-columns: 1fr;
@@ -260,29 +229,26 @@
 }
 nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
 
-    /* 모집 안내 박스: 하늘색 배경 + 파란 테두리, 글자색은 기존 그대로 */
 .welcome-alert{
   background: linear-gradient(90deg, rgba(125,211,252,.18), rgba(59,130,246,.08));
   border: 1px solid #2563eb;
-  color: inherit; /* 전체 글자는 원래 색을 그대로 사용 */
+  color: inherit; 
 }
 
-/* 박스 내부의 링크(이메일)만 파란색 */
 .welcome-alert a{
-  color: #1d4ed8;           /* 파란색 링크 */
+  color: #1d4ed8; 
   text-decoration: none;
 }
 .welcome-alert a:hover{
   text-decoration: underline;
 }
-/* Professor 섹션 - 우측 사진 단독 레이아웃 */
+
 #professor .prof-photo-only{
-  background: transparent;        /* 카드 배경 제거 */
-  border: none;                   /* 카드 테두리 제거 */
-  padding: 0;                     /* 여백 제거 */
+  background: transparent;  
+  border: none;        
+  padding: 0;                  
 }
 
-/* Professor 오른쪽 사진 칼럼 고정폭 유지 */
 #professor .profile-grid{
   grid-template-columns: 1fr 360px;
 }
@@ -290,24 +256,21 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
   #professor .profile-grid{ grid-template-columns: 1fr; }
 }
 
-/* 사진 컨테이너 정렬 */
 #professor .prof-photo-only{
-  justify-self: end;   /* 오른쪽 끝 정렬 (원하면 center/end 조절) */
+  justify-self: end;  
   align-self: start;
 }
 
-/* 실제 이미지에 직접 적용: 크기 제한 */
 #professor .prof-photo-only img,
 #prof-hangue{
   width: 100%;
-  max-width: 360px;    /* ← 여기만 바꾸면 크기 조절 가능 */
+  max-width: 360px;  
   height: auto;
   display: block;
   object-fit: cover;
   border-radius: 12px;
 }
 
-/* 테두리 없애기(이미 넣으신 규칙 유지) */
 #prof-hangue{
   border: none !important;
 }
