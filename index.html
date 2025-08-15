@@ -261,7 +261,59 @@ footer .small-muted {color: #000000;}
 footer a {color: #1d4ed8; text-decoration: none;}
 footer a:hover {text-decoration: underline;}
 footer a:visited {color: #1d4ed8;}
+body{background: var(--bg-light) !important; color: var(--ink) !important;}
+a{ color:#1d4ed8 !important; text-decoration:none; }
+a:hover{ text-decoration:underline; }
+header.scrolled{
+  background:rgba(255,255,255,.9) !important;
+  backdrop-filter:saturate(140%) blur(10px);
+  border-bottom:1px solid var(--border-light) !important;
+}
+header.scrolled nav a{
+  color: var(--ink) !important;
+}
+header.scrolled nav a:hover{
+  background: rgba(0,0,0,.05) !important;
+  color: var(--ink) !important;
+  border-color: transparent !important;
+}
 
+/* 모바일 토글 버튼도 밝게 */
+.menu-toggle{
+  background:#f3f4f6 !important;
+  border:1px solid var(--border-light) !important;
+  color:var(--ink) !important;
+}
+    .card,
+.news-item,
+.search input,
+.tag,
+.pub{
+  background:#ffffff !important;
+  border:1px solid var(--border-light) !important;
+  color:var(--ink) !important;
+}
+
+/* 탭 버튼(회색 칩 느낌) */
+.tabs .tab{
+  background:#f3f4f6 !important;
+  border:1px solid var(--border-light) !important;
+  color:var(--ink) !important;
+}
+
+/* 서브 버튼(secondary) 밝게 */
+.btn.secondary{
+  background:#f3f4f6 !important;
+  color:var(--ink) !important;
+  border-color:var(--border-light) !important;
+}
+
+/* 맨 위로 버튼 밝게 */
+.top-button{
+  background:#ffffff !important;
+  border:1px solid var(--border-light) !important;
+  color:var(--ink) !important;
+}
   </style>
 </head>
 <body>
