@@ -143,21 +143,6 @@
     .welcome-grid{display:grid;gap:24px;grid-template-columns:220px minmax(0,1fr);align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
 
-.section h2{
-  position:relative;
-  padding-left:14px
-    font-size: 3rem;
-  font-weight: 900;; 
-}
-
-.section h2::before{
-  content:"";
-  position:absolute;
-  left:0; top:.1em; bottom:.1em;
-  width:5px;
-  background:var(--accent);
-  border-radius:2px;
-}
     @media (max-width: 768px) {
   .hero .container {
     padding-top: 120px; 
@@ -262,19 +247,15 @@ nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
 }
 
 #professor .prof-photo-only img,
-#prof-hangue{
-  width: 100%;
-  max-width: 360px;  
-  height: auto;
-  display: block;
-  object-fit: cover;
-  border-radius: 12px;
-}
+#prof-hangue{width: 100%;max-width: 360px;  height: auto;display: block;object-fit: cover;border-radius: 12px;}
 
-#prof-hangue{
-  border: none !important;
-}
+#prof-hangue{border: none !important;}
 
+#people .small-muted a{color:#1d4ed8;text-decoration:none;}
+#people .small-muted a:hover{text-decoration:underline;}
+#people .small-muted a:visited{color:#1d4ed8;}
+
+    
   </style>
 </head>
 <body>
