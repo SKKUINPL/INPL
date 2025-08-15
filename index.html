@@ -257,13 +257,14 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
 
 #undergrad,
 #alumni{
-  padding-bottom: 120px;
-  min-height: 60vh; 
+  margin-bottom: 120px;   /* 카드 높이는 그대로, 섹션 끝까지 여백만 추가 */
 }
 
 @media (max-width: 900px){
   #undergrad,
-  #alumni{ min-height: 40vh; padding-bottom: 80px; }
+  #alumni{
+    margin-bottom: 80px;
+  }
 }
                  
   </style>
