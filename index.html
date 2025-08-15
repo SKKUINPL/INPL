@@ -143,11 +143,7 @@
     .welcome-grid{display:grid;gap:24px;grid-template-columns:220px minmax(0,1fr);align-items:center}
     @media (max-width: 900px){.welcome-grid{grid-template-columns:1fr}}
 
-    @media (max-width: 768px) {
-  .hero .container {
-    padding-top: 120px; 
-  }
-}
+    @media (max-width: 768px) {.hero .container {padding-top: 120px; }}
 
 #welcome .welcome-grid{grid-template-columns: 420px minmax(0,1fr); gap: 40px; }
 #welcome .welcome-left{ justify-self: center; }
@@ -161,8 +157,7 @@
   padding-left: 22px;
   font-size: 3rem;
   font-weight: 900;
-  line-height: 1.2;
-}
+  line-height: 1.2;}
 
 .section h2::before{
   content: "";
@@ -173,78 +168,44 @@
   width: 6px;
   background: #1e40af;
   border-radius: 2px;
-  display: block; 
-}
+  display: block; }
 .section#welcome h2 {
-  margin-top: 0;
-}
+  margin-top: 0;}
 
 #welcome .welcome-grid{
   grid-template-columns: 420px minmax(0,1fr); 
   gap: 40px;
-  align-items: start; 
-}
+  align-items: start; }
 
 #welcome .welcome-left,
 #welcome .welcome-right{
-  align-self: start; 
-}
+  align-self: start; }
 
 #welcome .welcome-alert{
   grid-column: 1 / -1;
-  margin-top: 8px; 
-}
+  margin-top: 8px; }
 
 #welcome .welcome-logo{
   width: 100%;
   max-width: 420px; 
   height: auto;
   display: block;
-  margin-top: 50px;
-}
+  margin-top: 50px;}
 
-@media (max-width: 900px){
-  #welcome .welcome-grid{
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-  #welcome .welcome-alert{
-    grid-column: auto;
-  }
-}
+@media (max-width: 900px){#welcome .welcome-grid{grid-template-columns: 1fr; gap: 16px;  } #welcome .welcome-alert{grid-column: auto; }}
 nav a.active{ background:rgba(255,255,255,.12); border-color:transparent; }
 
-.welcome-alert{
-  background: linear-gradient(90deg, rgba(125,211,252,.18), rgba(59,130,246,.08));
-  border: 1px solid #2563eb;
-  color: inherit; 
-}
+  .welcome-alert{background: linear-gradient(90deg, rgba(125,211,252,.18), rgba(59,130,246,.08)); border: 1px solid #2563eb; color: inherit; 
 
-.welcome-alert a{
-  color: #1d4ed8; 
-  text-decoration: none;
-}
-.welcome-alert a:hover{
-  text-decoration: underline;
-}
+.welcome-alert a{color: #1d4ed8;  text-decoration: none;}
+.welcome-alert a:hover{text-decoration: underline;}
 
-#professor .prof-photo-only{
-  background: transparent;  
-  border: none;        
-  padding: 0;                  
-}
+#professor .prof-photo-only{background: transparent; border: none; padding: 0;}
 
-#professor .profile-grid{
-  grid-template-columns: 1fr 360px;
-}
-@media (max-width: 900px){
-  #professor .profile-grid{ grid-template-columns: 1fr; }
-}
+#professor .profile-grid{grid-template-columns: 1fr 360px;}
+@media (max-width: 900px){#professor .profile-grid{ grid-template-columns: 1fr; }}
 
-#professor .prof-photo-only{
-  justify-self: end;  
-  align-self: start;
-}
+#professor .prof-photo-only{justify-self: end; align-self: start;}
 
 #professor .prof-photo-only img,
 #prof-hangue{width: 100%;max-width: 360px;  height: auto;display: block;object-fit: cover;border-radius: 12px;}
@@ -269,78 +230,29 @@ main a:hover{ text-decoration:underline; }
 header.scrolled{
   background:rgba(255,255,255,.9) !important;
   backdrop-filter:saturate(140%) blur(10px);
-  border-bottom:1px solid var(--border-light) !important;
-}
-header.scrolled nav a{
-  color: var(--ink) !important;
-}
-header.scrolled nav a:hover{
-  background: rgba(0,0,0,.05) !important;
-  color: var(--ink) !important;
-  border-color: transparent !important;
-}
+  border-bottom:1px solid var(--border-light) !important;}
+header.scrolled nav a{color: var(--ink) !important;}
+header.scrolled nav a:hover{background: rgba(0,0,0,.05) !important; color: var(--ink) !important; border-color: transparent !important;}
 
-/* 모바일 토글 버튼도 밝게 */
-.menu-toggle{
-  background:#f3f4f6 !important;
-  border:1px solid var(--border-light) !important;
-  color:var(--ink) !important;
-}
-    .card,
-.news-item,
-.search input,
-.tag,
-.pub{
-  background:#ffffff !important;
-  border:1px solid var(--border-light) !important;
-  color:var(--ink) !important;
-}
+.menu-toggle{  background:#f3f4f6 !important; border:1px solid var(--border-light) !important; color:var(--ink) !important;}
+.card,.news-item,.search input,.tag,.pub{background:#ffffff !important; border:1px solid var(--border-light) !important; color:var(--ink) !important;}
 
-/* 탭 버튼(회색 칩 느낌) */
-.tabs .tab{
-  background:#f3f4f6 !important;
-  border:1px solid var(--border-light) !important;
-  color:var(--ink) !important;
-}
+.tabs .tab{background:#f3f4f6 !important; border:1px solid var(--border-light) !important; color:var(--ink) !important;}
 
-/* 서브 버튼(secondary) 밝게 */
-.btn.secondary{
-  background:#f3f4f6 !important;
-  color:var(--ink) !important;
-  border-color:var(--border-light) !important;
-}
+.btn.secondary{background:#f3f4f6 !important; color:var(--ink) !important; border-color:var(--border-light) !important;}
 
-/* 맨 위로 버튼 밝게 */
-.top-button{
-  background:#ffffff !important;
-  border:1px solid var(--border-light) !important;
-  color:var(--ink) !important;
-}
+.top-button{background:#ffffff !important; border:1px solid var(--border-light) !important; color:var(--ink) !important;}
 
-header{
-  background: transparent !important;
-  backdrop-filter: none !important;
-  border-bottom: none !important;
-}
+header{background: transparent !important; backdrop-filter: none !important; border-bottom: none !important;}
 
-/* 스크롤 후: 어두운 반투명 배경 + 기존 테두리 */
-header.scrolled{
-  background: rgba(10,14,20,.8) !important;
-  backdrop-filter: saturate(140%) blur(10px) !important;
-  border-bottom: 1px solid var(--border) !important;
-}
+header.scrolled{background: rgba(10,14,20,.8) !important; backdrop-filter: saturate(140%) blur(10px) !important; border-bottom: 1px solid var(--border) !important;}
 
-/* 메뉴 링크 색: 언제나 흰색 (히어로 위/스크롤 후 모두) */
-header nav a{
-  color: #fff !important;
-}
-header nav a:hover{
-  background: rgba(255,255,255,.12) !important;
-  color: #fff !important;
-  border-color: transparent !important;
-}
+header nav a{color: #fff !important;}
+header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !important; border-color: transparent !important;}
 
-    
+
+
+                 
   </style>
 </head>
 <body>
