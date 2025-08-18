@@ -841,237 +841,176 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
   <div class="container">
     <h2>INPL News</h2>
 
-    <!-- Tabs -->
-    <div class="tabs" role="tablist" aria-label="뉴스 분류">
-      <button class="tab active" role="tab" aria-selected="true" data-target="headline">Headline</button>
-      <button class="tab" role="tab" aria-selected="false" data-target="awards">Awards</button>
-    </div>
-
-    <!-- Panels -->
-    <div id="headline" class="news-panel" role="tabpanel">
+    <!-- Headline -->
+    <h5 style="margin:18px 0 10px">Headline</h5>
+    <div class="news-panel" role="region" aria-label="Headline">
       <div class="carousel" data-panel="headline">
-        <button class="nav prev" aria-label="이전 보기" disabled>
-          <span aria-hidden="true">‹</span>
-        </button>
-
+        <button class="nav prev" aria-label="이전 보기" disabled><span aria-hidden="true">‹</span></button>
         <div class="viewport" aria-live="polite">
           <ul class="track" role="list"></ul>
         </div>
-
-        <button class="nav next" aria-label="다음 보기">
-          <span aria-hidden="true">›</span>
-        </button>
+        <button class="nav next" aria-label="다음 보기"><span aria-hidden="true">›</span></button>
       </div>
     </div>
 
-    <div id="awards" class="news-panel" role="tabpanel" hidden>
+    <!-- Awards -->
+    <h5 style="margin:26px 0 10px">Awards</h5>
+    <div class="news-panel" role="region" aria-label="Awards">
       <div class="carousel" data-panel="awards">
-        <button class="nav prev" aria-label="이전 보기" disabled>
-          <span aria-hidden="true">‹</span>
-        </button>
-
+        <button class="nav prev" aria-label="이전 보기" disabled><span aria-hidden="true">‹</span></button>
         <div class="viewport" aria-live="polite">
           <ul class="track" role="list"></ul>
         </div>
-
-        <button class="nav next" aria-label="다음 보기">
-          <span aria-hidden="true">›</span>
-        </button>
+        <button class="nav next" aria-label="다음 보기"><span aria-hidden="true">›</span></button>
       </div>
     </div>
   </div>
 
   <!-- Styles (섹션 내부 스코프) -->
   <style>
-    #news .tabs {
-      display: flex; gap: 8px; margin: 16px 0 20px;
-    }
-    #news .tab {
-      padding: 8px 14px; border: 1px solid var(--muted,#a0a0a0);
-      background: white; color: #222; border-radius: 999px; cursor: pointer;
-      font-weight: 600; font-size: 0.95rem;
-    }
-    #news .tab.active { background: #111; color: #fff; border-color:#111; }
-
     #news .carousel {
-      position: relative; display: grid; grid-template-columns: 48px 1fr 48px; align-items: center;
+      position: relative; display: grid;
+      grid-template-columns: 48px 1fr 48px; align-items: center;
     }
     #news .nav {
       width: 40px; height: 40px; border-radius: 50%;
       border: 1px solid #ddd; background: #fff; cursor: pointer;
-      display: grid; place-items: center; font-size: 28px; line-height: 1; user-select: none;
+      display: grid; place-items: center; font-size: 28px; line-height: 1;
       transition: transform .1s ease, opacity .2s;
     }
     #news .nav:disabled { opacity: .35; cursor: not-allowed; }
     #news .nav:not(:disabled):active { transform: scale(.96); }
 
-    #news .viewport {
-      overflow: hidden; position: relative;
-    }
+    #news .viewport { overflow: hidden; position: relative; }
     #news .track {
-      display: grid; grid-auto-flow: column; grid-auto-columns: 25%;
-      gap: 16px; padding: 8px; list-style: none; margin: 0;
-      transition: transform .35s ease;
-    }
-    /* 반응형: 태블릿 2장, 모바일 1장 */
-    @media (max-width: 1024px){
-      #news .track { grid-auto-columns: 50%; }
-    }
-    @media (max-width: 640px){
-      #news .track { grid-auto-columns: 100%; }
+      display: flex; gap: 16px; padding: 8px; list-style: none; margin: 0;
+      will-change: transform; transition: transform .35s ease;
     }
 
-    #news .card {
-      height: 100%; background: #fff; border: 1px solid #eee; border-radius: 14px; overflow: hidden;
-      display: grid; grid-template-rows: 140px 1fr auto; box-shadow: 0 6px 20px rgba(0,0,0,.04);
+    /* 공통 카드: 데스크톱 4장, 태블릿 2장, 모바일 1장 */
+    #news .card { flex: 0 0 calc(25% - 12px); border-radius: 14px; overflow: hidden;
+      background: #fff; border: 1px solid #eee; display: grid; grid-template-rows: auto 1fr auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,.04);
     }
-    #news .thumb {
-      width: 100%; height: 100%; object-fit: cover;
-      background: #f5f5f7;
-    }
-    #news .body {
-      padding: 14px 14px 6px;
-      display: grid; gap: 6px;
-    }
-    #news .kicker {
-      color: #6b7280; font-size: .78rem; font-weight: 700; letter-spacing: .02em;
-      text-transform: uppercase;
-    }
+    @media (max-width: 1024px){ #news .card { flex: 0 0 calc(50% - 8px); } }
+    @media (max-width: 640px){  #news .card { flex: 0 0 100%; } }
+
+    /* Headline 카드(이미지 포함) */
+    #news .thumb { width: 100%; aspect-ratio: 16 / 6; object-fit: cover; background:#f5f5f7; }
+    #news .body { padding: 14px 14px 6px; display: grid; gap: 6px; }
+    #news .kicker { color:#6b7280; font-size:.78rem; font-weight:700; letter-spacing:.02em; text-transform:uppercase; }
     #news .title {
-      font-size: 1rem; font-weight: 700; line-height: 1.3; color: #111;
-      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+      font-size: 1rem; font-weight: 700; line-height: 1.3; color:#111;
+      display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;
     }
-    #news .meta {
-      display: flex; align-items: center; gap: 10px; padding: 10px 14px 14px; color: #6b7280; font-size: .85rem;
-    }
+    #news .meta { display:flex; align-items:center; gap:10px; padding:10px 14px 14px; color:#6b7280; font-size:.85rem; }
     #news .meta time { white-space: nowrap; }
-    #news .meta a {
-      margin-left: auto; text-decoration: none; font-weight: 600;
-      border-bottom: 1px solid transparent; color: #111;
-    }
-    #news .meta a:hover { border-color: #111; }
+    #news .meta a { margin-left:auto; text-decoration:none; font-weight:600; border-bottom:1px solid transparent; color:#111; }
+    #news .meta a:hover { border-color:#111; }
+
+    /* Awards 카드(텍스트 전용) */
+    #news .card.award { grid-template-rows: 1fr auto; }
+    #news .award-body { padding: 16px 14px 6px; display:grid; gap:8px; }
+    #news .award-title { font-size:.95rem; font-weight:700; color:#111; line-height:1.35; }
+    #news .award-meta { display:flex; align-items:center; gap:10px; padding:10px 14px 14px; color:#6b7280; font-size:.85rem; }
+    #news .label { font-size:.72rem; font-weight:700; color:#6b7280; letter-spacing:.03em; text-transform:uppercase; }
   </style>
 
-  <!-- Script: 데이터만 바꾸면 동작 -->
+  <!-- Script: 데이터 정의 + 렌더/캐러셀 -->
   <script>
-    // 1) 카드 데이터 입력 (이미지/링크/제목/요약/날짜)
-    //    날짜는 'YYYY-MM-DD' 형식 권장
+    // ===== 1) 데이터 =====
     const NEWS_DATA = {
       headline: [
-        {
-          date: '2025-09-01',
-          title: '이동희 교수님 정교수 승진 소식',
-          summary: '우수한 연구 성과와 열정적인 교육으로 대학 발전에 기여하셨습니다.',
-          image: '/assets/images/news/prof-promotion.jpg',
-          url: '#',
-          kicker: 'News & Notices'
-        },
-        {
-          date: '2025-06-25',
-          title: '[2025. 06. 25] EURO 2025 학회 Keynote',
-          summary: 'EURO 2025 – 34th European Conference on Operational Research.',
-          image: '/assets/images/news/euro2025.jpg',
-          url: '#',
-          kicker: 'News & Notices'
-        },
-        {
-          date: '2025-06-20',
-          title: '[2025. 06. 18 - 20.] 대한산업공학 춘계공동학술대회',
-          summary: '이동희 교수 발표.',
-          image: '/assets/images/news/ie-conference.jpg',
-          url: '#',
-          kicker: 'News & Notices'
-        },
-        {
-          date: '2025-06-09',
-          title: '품질공학연구실 행궁동 나들이',
-          summary: '연구실 구성원들과 함께 나들이.',
-          image: '/assets/images/news/lab-outing.jpg',
-          url: '#',
-          kicker: 'News & Notices'
-        }
+        { date:'2023-07-01', title:'Dr. Hangue Park received "Innovative Research Lab Initiation Award (최초혁신연구실)" funded by National Research Foundation of Korea.', image:'/assets/images/news/nrf-innovative-lab.jpg', url:'#', kicker:'News & Notices' },
+        { date:'2023-03-01', title:'Dr. Hangue Park joined "Engineering Research Center for Developing R2R Printed Flexible Computer (인쇄유연컴퓨터개발 연구센터)" funded by National Research Foundation of Korea.', image:'/assets/images/news/r2r-center.jpg', url:'#', kicker:'News & Notices' },
+        { date:'2023-03-01', title:'Dr. Hangue Park received "Excellent Young Research Award (우수신진연구)" funded by National Research Foundation of Korea.', image:'/assets/images/news/young-research-award.jpg', url:'#', kicker:'News & Notices' },
+        { date:'2022-09-01', title:'Dr. Hangue Park received "SCIRTS Pilot Research Grants" funded by Craig Neilsen Foundation.', image:'/assets/images/news/scirts-grant.jpg', url:'#', kicker:'News & Notices' },
+        { date:'2022-09-01', title:'Dr. Hangue Park joined Department of Biomedical Engineering at Sungkyunkwan University in South Korea. Dr. Park will be still affiliated at Texas A&M University as an adjunct faculty.', image:'/assets/images/news/skku-join.jpg', url:'#', kicker:'News & Notices' }
       ],
       awards: [
-        {
-          date: '2024-05-01',
-          title: 'Juneseung – Outstanding Poster Award (KSMBE 2024 Spring)',
-          summary: 'Congratulations!',
-          image: '/assets/images/news/awards-ksmbe-2024.jpg',
-          url: '#',
-          kicker: 'Students Awards'
-        },
-        {
-          date: '2023-12-01',
-          title: 'Yeonwoo 외 – ExCool Bronze Award',
-          summary: 'Congratulations!',
-          image: '/assets/images/news/awards-excool.jpg',
-          url: '#',
-          kicker: 'Students Awards'
-        },
-        {
-          date: '2019-04-20',
-          title: 'Siddarth – SfN Junior Grad 1st-place (Poster)',
-          summary: 'Congratulations!',
-          image: '/assets/images/news/awards-sfn.jpg',
-          url: '#',
-          kicker: 'Students Awards'
-        }
+        { date:'2024-05-01', title:'Juneseung received outstanding poster presentation award at 2024 Spring meeting, The Korean Society of Medical and Biological Engineering. Congratulations!' },
+        { date:'2023-12-01', title:'Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 ExCool competition, Biomedical Engineering Sungkyunkwan University. Congratulations!' },
+        { date:'2023-12-02', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 Creative innovation DNA Industry-academic cooperation team project, Innovation Center for Engineering Education in South Korea. Congratulations!' },
+        { date:'2023-12-03', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Silver Award at 2023 Sungkyunkwan Consortium Creative Comprehensive Design Competition, Sungkyunkwan University. Congratulations!' },
+        { date:'2023-12-04', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Korea Venture Business Women’s Association Chairman’s Award, 2023 Engineering Festival, Ministry of Trade, Industry and Energy. Congratulations!' },
+        { date:'2022-03-01', title:'Ahnsei got the 1st-place Award ($300) for poster presentation in Mathematics, Engineering, Technology and Computer Sciences Category, at the Student Research Week at Texas A&M University. Congratulations!' },
+        { date:'2022-03-02', title:'Ahnsei got the 1st-place Award, for oral presentation in PhD Student Category, at the 17th Texas A&M University System Pathways Student Research Symposium. Congratulations!' },
+        { date:'2019-12-01', title:'Jake got the 2nd-place Award for poster presentation at the Annual Mission Connect Symposium by TIRR foundation. Congratulations!' },
+        { date:'2019-04-01', title:'Siddarth got the 1st-place Award, for poster presentation in Junior Graduate Student Category, at the Society for Neuroscience conference at Texas A&M University. Congratulations!' },
+        { date:'2019-04-02', title:'Devon got the Fouraker Fellowship ($20,000) from the Department of Electrical and Computer Engineering at Texas A&M University. Congratulations!' },
+        { date:'2019-03-01', title:'Siddarth and Jake got the 1st-place Award ($300) & the 2nd-place Award ($150), respectively for poster presentation in Engineering Category, at the Student Research Week at Texas A&M University. We swept the engineering category in this year. Congratulations!' },
+        { date:'2019-02-01', title:'Jake and his team got the 1st-place award ($1,000), from the Aggies Invent for the Planet Design Competition at Texas A&M University. Congratulations!' },
+        { date:'2018-06-01', title:'Siddarth got the 3rd-place award, from Drillbotics 2018 - Drilling Systems Automation Technical Section (DSATS) at Texas A&M University. Congratulations!' },
+        { date:'2018-04-01', title:'Siddarth and his team got the 2nd-place award ($750), from the Aggies Invent for the Assistive Disabilities at Texas A&M University. Congratulations!' },
+        { date:'2018-03-01', title:'Siddarth got the 3rd-place Award, from the Texas Regional Engineering Conference - Student Engineers\' Council (SEC) at Texas A&M University. Congratulations!' }
       ]
     };
 
-    // 2) 최신순 정렬
-    for (const key of Object.keys(NEWS_DATA)) {
-      NEWS_DATA[key].sort((a,b)=> (b.date || '').localeCompare(a.date || ''));
+    // 최신순 정렬
+    for (const k of Object.keys(NEWS_DATA)) {
+      NEWS_DATA[k].sort((a,b)=> (b.date||'').localeCompare(a.date||''));
     }
 
-    // 3) 렌더 & 캐러셀 로직
+    // ===== 2) 렌더 & 캐러셀 =====
     (function initNews(){
       const panels = document.querySelectorAll('#news .carousel');
       panels.forEach(panel=>{
-        const panelKey = panel.getAttribute('data-panel');
-        const data = NEWS_DATA[panelKey] || [];
+        const key = panel.getAttribute('data-panel');
+        const data = NEWS_DATA[key] || [];
 
-        const track = panel.querySelector('.track');
-        const prevBtn = panel.querySelector('.prev');
-        const nextBtn = panel.querySelector('.next');
+        const track  = panel.querySelector('.track');
+        const prevBtn= panel.querySelector('.prev');
+        const nextBtn= panel.querySelector('.next');
 
-        // 카드 렌더
-        track.innerHTML = data.map(item => `
-          <li class="card" role="listitem">
-            <img class="thumb" src="${item.image}" alt="" loading="lazy">
-            <div class="body">
-              <div class="kicker">${item.kicker || ''}</div>
-              <div class="title">${item.title}</div>
-            </div>
-            <div class="meta">
-              <time datetime="${item.date}">${formatDateKR(item.date)}</time>
-              <a href="${item.url}" aria-label="자세히 보기">자세히</a>
-            </div>
-          </li>
-        `).join('');
+        // 카드 렌더링
+        track.innerHTML = data.map(item => {
+          if (key === 'headline') {
+            return `
+              <li class="card" role="listitem">
+                <img class="thumb" src="${item.image}" alt="" loading="lazy">
+                <div class="body">
+                  <div class="kicker">${item.kicker || 'News & Notices'}</div>
+                  <div class="title">${item.title}</div>
+                </div>
+                <div class="meta">
+                  <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+                  ${item.url ? `<a href="${item.url}" aria-label="자세히 보기">자세히</a>` : ''}
+                </div>
+              </li>`;
+          } else {
+            return `
+              <li class="card award" role="listitem">
+                <div class="award-body">
+                  <div class="label">STUDENTS AWARDS</div>
+                  <div class="award-title">${item.title}</div>
+                </div>
+                <div class="award-meta">
+                  <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+                </div>
+              </li>`;
+          }
+        }).join('');
 
-        // 상태
+        // 페이지 상태
         let page = 0;
-        const getCols = ()=> {
-          // grid-auto-columns 비율에 맞춰 한 화면 카드 수 계산
-          const width = panel.querySelector('.viewport').clientWidth;
-          const card = track.querySelector('.card');
-          if(!card) return 1;
-          const cardWidth = card.clientWidth + 16; // gap 고려(대략)
-          return Math.max(1, Math.round(width / cardWidth));
+        const getCols = () => {
+          if (window.matchMedia('(max-width: 640px)').matches) return 1;
+          if (window.matchMedia('(max-width: 1024px)').matches) return 2;
+          return 4;
         };
-
-        const getMaxPage = ()=> {
+        const getMaxPage = () => {
           const per = getCols();
           return Math.max(0, Math.ceil(data.length / per) - 1);
         };
-
-        const update = ()=>{
+        const update = () => {
           const per = getCols();
           const max = getMaxPage();
-          const offset = page * per;
-          const x = -(offset * (100 / per));
-          track.style.transform = `translateX(${x}%)`;
+          const card = track.querySelector('.card');
+          const gap = 16;
+          const cardWidth = card ? (card.getBoundingClientRect().width + gap) : 0;
+          const offsetCards = page * per;
+          const xpx = -(offsetCards * cardWidth);
+          track.style.transform = `translateX(${xpx}px)`;
           prevBtn.disabled = page <= 0;
           nextBtn.disabled = page >= max;
         };
@@ -1082,20 +1021,6 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
 
         update();
       });
-
-      // 탭 전환
-      const tabs = document.querySelectorAll('#news .tab');
-      tabs.forEach(tab=>{
-        tab.addEventListener('click', ()=>{
-          tabs.forEach(t=>{ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
-          tab.classList.add('active'); tab.setAttribute('aria-selected','true');
-
-          const target = tab.dataset.target;
-          document.querySelectorAll('#news .news-panel').forEach(p=>{
-            p.hidden = (p.id !== target);
-          });
-        });
-      });
     })();
 
     function formatDateKR(iso){
@@ -1105,6 +1030,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     }
   </script>
 </section>
+
 
   </main>
 
