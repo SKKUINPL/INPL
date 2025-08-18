@@ -582,7 +582,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
 <section id="research" class="section light">
   <div class="container">
     <h2>Current Research</h2>
-    <h5 style="margin-bottom:12px;margin-top:14px;font-size:22px;">Research Thema</h5>
+    <h5 style="margin-bottom:12px;margin-top:14px;font-size:30px;">Research Thema</h5>
     <div class="intro">
       <img src="intro.png" alt="Research Introduction" style="max-width:100%; height:auto; margin-bottom:20px;">
       <p class="subtitle">
@@ -842,7 +842,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     <h2>INPL News</h2>
 
     <!-- Headline -->
-    <h5 style="margin:18px 0 10px">Headline</h5>
+    <h5 style="margin-bottom:12px;margin-top:14px;font-size:30px;">Headline</h5>
     <div class="news-panel" role="region" aria-label="Headline">
       <div class="carousel" data-panel="headline">
         <button class="nav prev" aria-label="이전 보기" disabled><span aria-hidden="true">‹</span></button>
@@ -854,7 +854,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     </div>
 
     <!-- Awards -->
-    <h5 style="margin:26px 0 10px">Awards</h5>
+    <h5 style="margin-bottom:12px;margin-top:14px;font-size:30px;">Awards</h5>
     <div class="news-panel" role="region" aria-label="Awards">
       <div class="carousel" data-panel="awards">
         <button class="nav prev" aria-label="이전 보기" disabled><span aria-hidden="true">‹</span></button>
@@ -908,8 +908,15 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     #news .meta a { margin-left:auto; text-decoration:none; font-weight:600; border-bottom:1px solid transparent; color:#111; }
     #news .meta a:hover { border-color:#111; }
 
-    /* Awards 카드(텍스트 전용) */
-    #news .card.award { grid-template-rows: 1fr auto; }
+    /* Awards 카드(이미지 옵션) */
+    /* 이미지가 있을 때: 썸네일 + 본문 + 메타(2행 구조) */
+    #news .card.award.has-thumb { grid-template-rows: auto 1fr auto; }
+    #news .award-thumb {
+      width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background:#f5f5f7;
+    }
+    /* 이미지가 없을 때: 텍스트 전용(1행 + 메타) */
+    #news .card.award:not(.has-thumb) { grid-template-rows: 1fr auto; }
+
     #news .award-body { padding: 16px 14px 6px; display:grid; gap:8px; }
     #news .award-title { font-size:.95rem; font-weight:700; color:#111; line-height:1.35; }
     #news .award-meta { display:flex; align-items:center; gap:10px; padding:10px 14px 14px; color:#6b7280; font-size:.85rem; }
@@ -921,28 +928,28 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     // ===== 1) 데이터 =====
     const NEWS_DATA = {
       headline: [
-        { date:'2023-07-01', title:'Dr. Hangue Park received "Innovative Research Lab Initiation Award (최초혁신연구실)" funded by National Research Foundation of Korea.', image:'/assets/images/news/nrf-innovative-lab.jpg', url:'#', kicker:'News & Notices' },
-        { date:'2023-03-01', title:'Dr. Hangue Park joined "Engineering Research Center for Developing R2R Printed Flexible Computer (인쇄유연컴퓨터개발 연구센터)" funded by National Research Foundation of Korea.', image:'/assets/images/news/r2r-center.jpg', url:'#', kicker:'News & Notices' },
-        { date:'2023-03-01', title:'Dr. Hangue Park received "Excellent Young Research Award (우수신진연구)" funded by National Research Foundation of Korea.', image:'/assets/images/news/young-research-award.jpg', url:'#', kicker:'News & Notices' },
-        { date:'2022-09-01', title:'Dr. Hangue Park received "SCIRTS Pilot Research Grants" funded by Craig Neilsen Foundation.', image:'/assets/images/news/scirts-grant.jpg', url:'#', kicker:'News & Notices' },
-        { date:'2022-09-01', title:'Dr. Hangue Park joined Department of Biomedical Engineering at Sungkyunkwan University in South Korea. Dr. Park will be still affiliated at Texas A&M University as an adjunct faculty.', image:'/assets/images/news/skku-join.jpg', url:'#', kicker:'News & Notices' }
+        { date:'2023-07-01', title:'Dr. Hangue Park received "Innovative Research Lab Initiation Award (최초혁신연구실)" funded by National Research Foundation of Korea.', image:'/assets/images/news/nrf-innovative-lab.jpg', url:'#', kicker:'Headline' },
+        { date:'2023-03-01', title:'Dr. Hangue Park joined "Engineering Research Center for Developing R2R Printed Flexible Computer (인쇄유연컴퓨터개발 연구센터)" funded by National Research Foundation of Korea.', image:'/assets/images/news/r2r-center.jpg', url:'#', kicker:'Headline' },
+        { date:'2023-03-01', title:'Dr. Hangue Park received "Excellent Young Research Award (우수신진연구)" funded by National Research Foundation of Korea.', image:'/assets/images/news/young-research-award.jpg', url:'#', kicker:'Headline' },
+        { date:'2022-09-01', title:'Dr. Hangue Park received "SCIRTS Pilot Research Grants" funded by Craig Neilsen Foundation.', image:'/assets/images/news/scirts-grant.jpg', url:'#', kicker:'Headline' },
+        { date:'2022-09-01', title:'Dr. Hangue Park joined Department of Biomedical Engineering at Sungkyunkwan University in South Korea. Dr. Park will be still affiliated at Texas A&M University as an adjunct faculty.', image:'/assets/images/news/skku-join.jpg', url:'#', kicker:'Headline' }
       ],
       awards: [
-        { date:'2024-05-01', title:'Juneseung received outstanding poster presentation award at 2024 Spring meeting, The Korean Society of Medical and Biological Engineering. Congratulations!' },
-        { date:'2023-12-01', title:'Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 ExCool competition, Biomedical Engineering Sungkyunkwan University. Congratulations!' },
-        { date:'2023-12-02', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 Creative innovation DNA Industry-academic cooperation team project, Innovation Center for Engineering Education in South Korea. Congratulations!' },
-        { date:'2023-12-03', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Silver Award at 2023 Sungkyunkwan Consortium Creative Comprehensive Design Competition, Sungkyunkwan University. Congratulations!' },
-        { date:'2023-12-04', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Korea Venture Business Women’s Association Chairman’s Award, 2023 Engineering Festival, Ministry of Trade, Industry and Energy. Congratulations!' },
-        { date:'2022-03-01', title:'Ahnsei got the 1st-place Award ($300) for poster presentation in Mathematics, Engineering, Technology and Computer Sciences Category, at the Student Research Week at Texas A&M University. Congratulations!' },
-        { date:'2022-03-02', title:'Ahnsei got the 1st-place Award, for oral presentation in PhD Student Category, at the 17th Texas A&M University System Pathways Student Research Symposium. Congratulations!' },
-        { date:'2019-12-01', title:'Jake got the 2nd-place Award for poster presentation at the Annual Mission Connect Symposium by TIRR foundation. Congratulations!' },
-        { date:'2019-04-01', title:'Siddarth got the 1st-place Award, for poster presentation in Junior Graduate Student Category, at the Society for Neuroscience conference at Texas A&M University. Congratulations!' },
-        { date:'2019-04-02', title:'Devon got the Fouraker Fellowship ($20,000) from the Department of Electrical and Computer Engineering at Texas A&M University. Congratulations!' },
-        { date:'2019-03-01', title:'Siddarth and Jake got the 1st-place Award ($300) & the 2nd-place Award ($150), respectively for poster presentation in Engineering Category, at the Student Research Week at Texas A&M University. We swept the engineering category in this year. Congratulations!' },
-        { date:'2019-02-01', title:'Jake and his team got the 1st-place award ($1,000), from the Aggies Invent for the Planet Design Competition at Texas A&M University. Congratulations!' },
-        { date:'2018-06-01', title:'Siddarth got the 3rd-place award, from Drillbotics 2018 - Drilling Systems Automation Technical Section (DSATS) at Texas A&M University. Congratulations!' },
-        { date:'2018-04-01', title:'Siddarth and his team got the 2nd-place award ($750), from the Aggies Invent for the Assistive Disabilities at Texas A&M University. Congratulations!' },
-        { date:'2018-03-01', title:'Siddarth got the 3rd-place Award, from the Texas Regional Engineering Conference - Student Engineers\' Council (SEC) at Texas A&M University. Congratulations!' }
+        { date:'2024-05-01', title:'Juneseung received outstanding poster presentation award at 2024 Spring meeting, The Korean Society of Medical and Biological Engineering. Congratulations!', image:'/assets/images/awards/2024-ksmbe-juneseung.jpg', url:'#' },
+        { date:'2023-12-01', title:'Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 ExCool competition, Biomedical Engineering Sungkyunkwan University. Congratulations!', image:'/assets/images/awards/2023-excool-bronze.jpg', url:'#' },
+        { date:'2023-12-02', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Bronze award at 2023 Creative innovation DNA Industry-academic cooperation team project, Innovation Center for Engineering Education in South Korea. Congratulations!', image:'/assets/images/awards/2023-creative-innovation-bronze.jpg', url:'#' },
+        { date:'2023-12-03', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Silver Award at 2023 Sungkyunkwan Consortium Creative Comprehensive Design Competition, Sungkyunkwan University. Congratulations!', image:'/assets/images/awards/2023-ckd-silver.jpg', url:'#' },
+        { date:'2023-12-04', title:'Eunseo, JiHyeon, Sua, Yeonwoo, Jiseung, Seohee, and Saemin received Korea Venture Business Women’s Association Chairman’s Award, 2023 Engineering Festival, Ministry of Trade, Industry and Energy. Congratulations!', image:'/assets/images/awards/2023-engineering-festival.jpg', url:'#' },
+        { date:'2022-03-01', title:'Ahnsei got the 1st-place Award ($300) for poster presentation in Mathematics, Engineering, Technology and Computer Sciences Category, at the Student Research Week at Texas A&M University. Congratulations!', image:'/assets/images/awards/2022-srw-ahnsei.jpg', url:'#' },
+        { date:'2022-03-02', title:'Ahnsei got the 1st-place Award, for oral presentation in PhD Student Category, at the 17th Texas A&M University System Pathways Student Research Symposium. Congratulations!', image:'/assets/images/awards/2022-pathways-ahnsei.jpg', url:'#' },
+        { date:'2019-12-01', title:'Jake got the 2nd-place Award for poster presentation at the Annual Mission Connect Symposium by TIRR foundation. Congratulations!', image:'/assets/images/awards/2019-mission-connect-jake.jpg', url:'#' },
+        { date:'2019-04-01', title:'Siddarth got the 1st-place Award, for poster presentation in Junior Graduate Student Category, at the Society for Neuroscience conference at Texas A&M University. Congratulations!', image:'/assets/images/awards/2019-sfn-siddarth.jpg', url:'#' },
+        { date:'2019-04-02', title:'Devon got the Fouraker Fellowship ($20,000) from the Department of Electrical and Computer Engineering at Texas A&M University. Congratulations!', image:'/assets/images/awards/2019-fouraker-devon.jpg', url:'#' },
+        { date:'2019-03-01', title:'Siddarth and Jake got the 1st-place Award ($300) & the 2nd-place Award ($150), respectively for poster presentation in Engineering Category, at the Student Research Week at Texas A&M University. We swept the engineering category in this year. Congratulations!', image:'/assets/images/awards/2019-srw-winners.jpg', url:'#' },
+        { date:'2019-02-01', title:'Jake and his team got the 1st-place award ($1,000), from the Aggies Invent for the Planet Design Competition at Texas A&M University. Congratulations!', image:'/assets/images/awards/2019-aggies-invent-jake.jpg', url:'#' },
+        { date:'2018-06-01', title:'Siddarth got the 3rd-place award, from Drillbotics 2018 - Drilling Systems Automation Technical Section (DSATS) at Texas A&M University. Congratulations!', image:'/assets/images/awards/2018-drillbotics-siddarth.jpg', url:'#' },
+        { date:'2018-04-01', title:'Siddarth and his team got the 2nd-place award ($750), from the Aggies Invent for the Assistive Disabilities at Texas A&M University. Congratulations!', image:'/assets/images/awards/2018-aggies-invent-siddarth.jpg', url:'#' },
+        { date:'2018-03-01', title:'Siddarth got the 3rd-place Award, from the Texas Regional Engineering Conference - Student Engineers\' Council (SEC) at Texas A&M University. Congratulations!', image:'/assets/images/awards/2018-sec-siddarth.jpg', url:'#' }
       ]
     };
 
@@ -969,7 +976,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
               <li class="card" role="listitem">
                 <img class="thumb" src="${item.image}" alt="" loading="lazy">
                 <div class="body">
-                  <div class="kicker">${item.kicker || 'News & Notices'}</div>
+                  <div class="kicker">${item.kicker || 'Headline'}</div>
                   <div class="title">${item.title}</div>
                 </div>
                 <div class="meta">
@@ -978,14 +985,17 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
                 </div>
               </li>`;
           } else {
+            const hasImg = !!item.image;
             return `
-              <li class="card award" role="listitem">
+              <li class="card award ${hasImg ? 'has-thumb' : ''}" role="listitem">
+                ${hasImg ? `<img class="award-thumb" src="${item.image}" alt="" loading="lazy">` : ''}
                 <div class="award-body">
                   <div class="label">STUDENTS AWARDS</div>
                   <div class="award-title">${item.title}</div>
                 </div>
                 <div class="award-meta">
                   <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+                  ${item.url ? `<a href="${item.url}" aria-label="자세히 보기">자세히</a>` : ''}
                 </div>
               </li>`;
           }
@@ -1030,6 +1040,7 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     }
   </script>
 </section>
+
 
 
   </main>
