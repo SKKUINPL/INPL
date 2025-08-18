@@ -972,32 +972,34 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
         // 카드 렌더링
         track.innerHTML = data.map(item => {
           if (key === 'headline') {
-            return `
-              <li class="card" role="listitem">
-                <img class="thumb" src="${item.image}" alt="" loading="lazy">
-                <div class="body">
-                  <div class="kicker">${item.kicker || 'Headline'}</div>
-                  <div class="title">${item.title}</div>
-                </div>
-                <div class="meta">
-                  <time datetime="${item.date}">${formatDateKR(item.date)}</time>
-                  ${item.url ? `<a href="${item.url}" aria-label="자세히 보기">자세히</a>` : ''}
-                </div>
-              </li>`;
+// Headline 카드 렌더링 부분
+return `
+  <li class="card" role="listitem">
+    <img class="thumb" src="${item.image}" alt="" loading="lazy">
+    <div class="body">
+      <div class="kicker">${item.kicker || 'Headline'}</div>
+      <div class="title">${item.title}</div>
+    </div>
+    <div class="meta">
+      <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+    </div>
+  </li>`;
+
           } else {
             const hasImg = !!item.image;
-            return `
-              <li class="card award ${hasImg ? 'has-thumb' : ''}" role="listitem">
-                ${hasImg ? `<img class="award-thumb" src="${item.image}" alt="" loading="lazy">` : ''}
-                <div class="award-body">
-                  <div class="label">STUDENTS AWARDS</div>
-                  <div class="award-title">${item.title}</div>
-                </div>
-                <div class="award-meta">
-                  <time datetime="${item.date}">${formatDateKR(item.date)}</time>
-                  ${item.url ? `<a href="${item.url}" aria-label="자세히 보기">자세히</a>` : ''}
-                </div>
-              </li>`;
+// Awards 카드 렌더링 부분
+return `
+  <li class="card award ${hasImg ? 'has-thumb' : ''}" role="listitem">
+    ${hasImg ? `<img class="award-thumb" src="${item.image}" alt="" loading="lazy">` : ''}
+    <div class="award-body">
+      <div class="label">STUDENTS AWARDS</div>
+      <div class="award-title">${item.title}</div>
+    </div>
+    <div class="award-meta">
+      <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+    </div>
+  </li>`;
+
           }
         }).join('');
 
