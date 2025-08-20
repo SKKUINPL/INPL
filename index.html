@@ -621,12 +621,23 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
 </section>
 
 
-    <section id="publications" class="section light" hidden><div class="container">
-      <h2>Publications</h2>
-      <div class="search">
-        <input id="pubSearch" type="search" placeholder="제목, 저자, 년도 키워드를 검색하세요(Search by title, author, and year keywords).">
-      </div>
-      <div id="pubList" class="pub-list">
+<section id="publications" class="section light" hidden>
+  <div class="container">
+    <h2>Publications</h2>
+
+    <!-- 검색 UI -->
+    <div class="search" style="display:flex; gap:10px; align-items:center; margin:8px 0 16px;">
+      <input id="pubSearch" type="search"
+             placeholder="제목/저자/년도/키워드 + 유형(저널·컨퍼런스·오랄/포스터) — 예: 2024 Park journal"
+             style="flex:1; background:#fff; border:2px solid #2563eb; border-radius:10px; color:#111; padding:10px" />
+      <button id="pubClear" type="button"
+              style="padding:10px 14px; border-radius:10px; border:1px solid #e5e7eb; background:#fff; cursor:pointer;">
+        Clear
+      </button>
+    </div>
+
+    <!-- 목록 -->
+    <div id="pubList" class="pub-list" style="display:flex; flex-direction:column; gap:12px">
 <!-- ===== Journal Publications (2020–2024) ===== -->
 <div class="pub" data-keywords="2024 Scientific Reports Ravichandran Patton Park electrotactile proprioception recalibration">
   <span class="marker">Journal</span>
@@ -837,13 +848,90 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
   <span class="marker">Journal</span>
    Zhao A, Yeo M, Manoharan S, Ryu S, and Park H, “Electrically-Evoked Artificial Proximity Sensation Enhanced Fine Finger Control in Telerobotic Pinch,” <span class="small-muted">Scientific Reports</span>, Jan. 2020 — <a href="https://www.nature.com/articles/s41598-019-56985-9" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.38)</span>.
 </div>
-
-
-
-        
-      </div>
     </div>
-    </section>
+
+    <!-- 결과 없음 -->
+    <p id="pubEmpty" class="small-muted" style="display:none; margin-top:8px;">
+      검색 결과가 없습니다. 키워드를 줄이거나 다른 단어로 시도해 보세요.
+    </p>
+  </div>
+
+  <script>
+    (function publicationsSearch() {
+      const $input = document.getElementById('pubSearch');
+      const $clear = document.getElementById('pubClear');
+      const $list  = document.getElementById('pubList');
+      const $empty = document.getElementById('pubEmpty');
+      const $items = Array.from($list.querySelectorAll('.pub'));
+
+      // 유형 동의어(영/한)
+      const TYPE_SYNONYMS = {
+        journal:    ['journal','저널','논문'],
+        conference: ['conference','컨퍼런스','학회','학술대회'],
+        oral:       ['oral','poster','oral/poster','오랄','구두','포스터']
+      };
+
+      // 문자열 정규화
+      const norm = s => (s||'').toLowerCase().normalize('NFKC').replace(/\s+/g,' ').trim();
+
+      // 항목 유형 자동추론: .marker(.marker2/.marker3) → data-type
+      $items.forEach(item => {
+        if (!item.dataset.type) {
+          const m = item.querySelector('.marker, .marker2, .marker3');
+          const t = m ? norm(m.textContent) : '';
+          let type = '';
+          if (t.includes('journal')) type = 'journal';
+          else if (t.includes('conference')) type = 'conference';
+          else if (t.includes('oral') || t.includes('poster')) type = 'oral';
+          item.dataset.type = type || '';
+        }
+      });
+
+      // 토큰을 유형으로 매핑
+      function tokenToType(token){
+        for (const [type, words] of Object.entries(TYPE_SYNONYMS)){
+          if (words.some(w => w === token || token.includes(w))) return type;
+        }
+        return null;
+      }
+
+      // 필터링 로직
+      function applyFilter(){
+        const q = norm($input.value);
+        const tokens = q ? q.split(' ') : [];
+
+        // 요청된 유형들(OR)
+        const requestedTypes = new Set(tokens.map(tokenToType).filter(Boolean));
+
+        let shown = 0;
+        $items.forEach(item => {
+          const haystack = norm(item.getAttribute('data-keywords') || item.textContent);
+          const itemType = item.dataset.type || '';
+
+          // 유형 매칭
+          const typeOk = requestedTypes.size === 0 ? true : requestedTypes.has(itemType);
+
+          // 키워드 AND (유형 토큰 제외)
+          const keywordTokens = tokens.filter(t => !tokenToType(t));
+          const textOk = keywordTokens.every(t => haystack.includes(t));
+
+          const match = typeOk && textOk;
+          item.style.display = match ? '' : 'none';
+          if (match) shown++;
+        });
+
+        $empty.style.display = shown === 0 ? '' : 'none';
+      }
+
+      // 이벤트
+      $input.addEventListener('input', applyFilter);
+      $clear.addEventListener('click', () => { $input.value=''; applyFilter(); });
+
+      // 초기 실행
+      applyFilter();
+    })();
+  </script>
+</section>
 
 <section id="news" class="section light">
   <div class="container">
