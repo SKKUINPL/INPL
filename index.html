@@ -962,6 +962,19 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     </div>
   </div>
 
+      <!-- Gallery -->
+    <h5 style="margin-bottom:12px;margin-top:14px;font-size:30px;">Gallery</h5>
+    <div class="news-panel" role="region" aria-label="Gallery">
+      <div class="carousel" data-panel="gallery">
+        <button class="nav prev" aria-label="이전 보기" disabled><span aria-hidden="true">‹</span></button>
+        <div class="viewport" aria-live="polite">
+          <ul class="track" role="list"></ul>
+        </div>
+        <button class="nav next" aria-label="다음 보기"><span aria-hidden="true">›</span></button>
+      </div>
+    </div>
+
+
   <!-- Styles (섹션 내부 스코프) -->
   <style>
     #news .carousel {
@@ -1065,7 +1078,13 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
         { date:'2018-06-18', title:'Siddarth got the 3rd-place award, from Drillbotics 2018 - Drilling Systems Automation Technical Section (DSATS) at Texas A&M University. Congratulations!', image:'TAMU.png'},
         { date:'2018-04-03', title:'Siddarth and his team got the 2nd-place award ($750), from the Aggies Invent for the Assistive Disabilities at Texas A&M University. Congratulations!', image:'TAMU.png'},
         { date:'2018-03-02', title:'Siddarth got the 3rd-place Award, from the Texas Regional Engineering Conference - Student Engineers\' Council (SEC) at Texas A&M University. Congratulations!', image:'TAMU.png'}
-      ]
+      ],
+        gallery: [
+    { date:'2024-08-15', title:'INPL members at KSBNS 2024 Conference', image:'gallery1.png', url:'#'},
+    { date:'2024-05-20', title:'Lab hiking day in spring', image:'gallery2.png', url:'#'},
+    { date:'2023-12-10', title:'End of year lab dinner gathering', image:'gallery3.png', url:'#'},
+    { date:'2023-09-01', title:'First day for new graduate students', image:'gallery4.png', url:'#'}
+  ]
     };
 
     // 최신순 정렬
@@ -1085,38 +1104,46 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
         const nextBtn= panel.querySelector('.next');
 
         // 카드 렌더링
-        track.innerHTML = data.map(item => {
-          if (key === 'headline') {
-// Headline 카드 렌더링 부분
-return `
-  <li class="card" role="listitem">
-    <img class="thumb" src="${item.image}" alt="" loading="lazy">
-    <div class="body">
-      <div class="kicker">${item.kicker || 'Headline'}</div>
-      <div class="title">${item.title}</div>
-    </div>
-    <div class="meta">
-      <time datetime="${item.date}">${formatDateKR(item.date)}</time>
-    </div>
-  </li>`;
+    track.innerHTML = data.map(item => {
+  if (key === 'headline') {
+    return `
+      <li class="card" role="listitem">
+        <img class="thumb" src="${item.image}" alt="" loading="lazy">
+        <div class="body">
+          <div class="kicker">${item.kicker || 'Headline'}</div>
+          <div class="title">${item.title}</div>
+        </div>
+        <div class="meta">
+          <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+        </div>
+      </li>`;
+  } else if (key === 'awards') {
+    return `
+      <li class="card award ${item.image ? 'has-thumb' : ''}" role="listitem">
+        ${item.image ? `<img class="award-thumb" src="${item.image}" alt="" loading="lazy">` : ''}
+        <div class="award-body">
+          <div class="label">STUDENTS AWARDS</div>
+          <div class="award-title">${item.title}</div>
+        </div>
+        <div class="award-meta">
+          <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+        </div>
+      </li>`;
+  } else if (key === 'gallery') {
+    return `
+      <li class="card" role="listitem">
+        <img class="thumb" src="${item.image}" alt="" loading="lazy">
+        <div class="body">
+          <div class="kicker">Gallery</div>
+          <div class="title">${item.title}</div>
+        </div>
+        <div class="meta">
+          <time datetime="${item.date}">${formatDateKR(item.date)}</time>
+        </div>
+      </li>`;
+  }
+}).join('');
 
-          } else {
-            const hasImg = !!item.image;
-// Awards 카드 렌더링 부분
-return `
-  <li class="card award ${hasImg ? 'has-thumb' : ''}" role="listitem">
-    ${hasImg ? `<img class="award-thumb" src="${item.image}" alt="" loading="lazy">` : ''}
-    <div class="award-body">
-      <div class="label">STUDENTS AWARDS</div>
-      <div class="award-title">${item.title}</div>
-    </div>
-    <div class="award-meta">
-      <time datetime="${item.date}">${formatDateKR(item.date)}</time>
-    </div>
-  </li>`;
-
-          }
-        }).join('');
 
         // 페이지 상태
         let page = 0;
