@@ -1267,7 +1267,6 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
       <div class="lb-body">
         <div class="lb-title" id="lbTitle"></div>
         <div class="lb-meta"><time id="lbDate"></time></div>
-        <div class="lb-desc" id="lbDesc"></div>
         <a id="lbLink" class="lb-link" href="#" target="_blank" rel="noopener" style="display:none;">원문/상세 보기 ↗</a>
       </div>
     </div>
@@ -1439,8 +1438,6 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     titleEl.textContent = title || '';
     dateEl.textContent  = date ? formatDateKR(date) : '';
     kickerEl.textContent = kicker || 'News';
-    // 설명은 title과 동일로 우선 세팅 (필요 시 분리 가능)
-    descEl.textContent = title || '';
 
     if (url && url !== '#') {
       linkEl.href = url;
