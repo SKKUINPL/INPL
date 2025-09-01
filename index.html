@@ -987,7 +987,7 @@ header nav a{ color:#fff !important; }
       // 토큰을 유형으로 매핑
       function tokenToType(token){
         for (const [type, words] of Object.entries(TYPE_SYNONYMS)){
-          if (words.some(w => w === token || token.includes(w))) return type;
+        if (words.some(w => w.startsWith(token) || token.startsWith(w))) return type;
         }
         return null;
       }
