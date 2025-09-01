@@ -1002,9 +1002,10 @@ header nav a{ color:#fff !important; }
 
         let shown = 0;
         $items.forEach(item => {
-          const haystack = norm(item.getAttribute('data-keywords') || item.textContent);
           const itemType = item.dataset.type || '';
-
+          const kw   = item.getAttribute('data-keywords') || '';
+          const text = item.textContent || '';
+          const haystack = norm(`${kw} ${text}`);
           // 유형 매칭
           const typeOk = requestedTypes.size === 0 ? true : requestedTypes.has(itemType);
 
