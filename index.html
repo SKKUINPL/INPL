@@ -336,7 +336,64 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
     padding-bottom: 80px;
   }
 }
+/* === 모바일 헤더 항상 보이게 + 드롭다운 메뉴 정돈 === */
+@media (max-width: 860px){
+  /* 헤더를 항상 반투명 배경으로(홈 상단에서도 보이게) */
+  header{
+    background: rgba(10,14,20,.86) !important;
+    backdrop-filter: saturate(140%) blur(10px) !important;
+    border-bottom: 1px solid var(--border) !important;
+    z-index: 9999 !important;   /* 히어로 위에 확실히 */
+  }
 
+  /* 햄버거 버튼을 확실히 보이게 */
+  .menu-toggle{
+    display:inline-flex !important;
+    align-items:center; gap:8px;
+    background:#0f1621; 
+    border:1px solid var(--border);
+    color:#fff !important;
+    padding:10px 12px;
+    border-radius:10px;
+    font-weight:700;
+  }
+
+  /* 로고가 너무 커서 버튼을 밀어내지 않도록 축소 */
+  .brand .logo{ height:40px !important; }
+
+  /* 닫힌 기본 상태 */
+  #site-nav{ 
+    display:none; 
+    position:absolute; 
+    top:100%; left:12px; right:12px;
+    background:#0f1621;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:8px;
+    z-index: 10000;           /* 헤더보다 위 */
+  }
+  /* 열렸을 때 드롭다운 */
+  #site-nav.open{ display:block; }
+  #site-nav ul{
+    display:flex; flex-direction:column; gap:6px;
+    margin:0; padding:8px 0;
+  }
+  #site-nav a{
+    display:block; 
+    color:#fff !important;
+    padding:12px 14px; 
+    border-radius:8px;
+  }
+  #site-nav a:hover{
+    background: rgba(255,255,255,.08);
+    color:#fff !important;
+    text-decoration:none;
+  }
+}
+
+/* 메뉴 링크가 항상 흰색 유지(데스크톱에서도 어두운 히어로에서 잘 보이게) */
+header nav a{ color:#fff !important; }
+    
   </style>
 </head>
 <body>
