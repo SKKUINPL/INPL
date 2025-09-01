@@ -313,7 +313,30 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
   display: block;
   margin: 0 auto 20px;  /* 가운데 정렬 + 하단 여백 */
 }
-    
+/* === Hero 텍스트를 섹션 하단 기준으로 정렬 === */
+.hero{
+  /* 위쪽 여백 제거, 배경/오버레이는 그대로 */
+  padding: 0 !important;
+  min-height: 90vh;            /* 화면 높이 기준 유지 */
+  position: relative;
+}
+
+/* 컨텐츠를 하단으로 붙이기 */
+.hero .container{
+  min-height: 90vh;            /* .hero 높이에 맞춤 */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;    /* ↓ 아래로 정렬 */
+  padding: 0 20px 120px;        /* 좌우 기본, 아래 여백(원하는 값으로 조절) */
+}
+
+/* 모바일에서는 아래 여백 조금 줄이기(옵션) */
+@media (max-width: 768px){
+  .hero .container{
+    padding-bottom: 80px;
+  }
+}
+
   </style>
 </head>
 <body>
