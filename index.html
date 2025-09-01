@@ -409,7 +409,7 @@ header nav a{ color:#fff !important; }
   </a>
 </div>
       <div class="actions" style="display:flex; align-items:center; gap:12px;">
-        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" onclick="toggleMenu()">메뉴</button>
+        <button class="menu-toggle" aria-controls="site-nav" aria-expanded="false" onclick="toggleMenu()">menu</button>
         <nav id="site-nav" aria-label="주요 메뉴">
           <ul>
             <li><a href="#home">Home</a></li>
@@ -1454,16 +1454,6 @@ header nav a{ color:#fff !important; }
   document.addEventListener('DOMContentLoaded', ()=>{
     updateHeaderBgForPage((location.hash||'#home').replace('#','') || 'home');
   });
-
-    // Publications search filter
-    const pubSearch = document.getElementById('pubSearch');
-    pubSearch.addEventListener('input', (e)=>{
-      const q = e.target.value.trim().toLowerCase();
-      document.querySelectorAll('#pubList .pub').forEach(item=>{
-        const keys = (item.getAttribute('data-keywords') || item.textContent).toLowerCase();
-        item.style.display = keys.includes(q) ? '' : 'none';
-      });
-    });
 
   // ===== 단일페이지 라우팅: 메뉴별 전용 화면 =====
   const PAGES = {
