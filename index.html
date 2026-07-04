@@ -122,8 +122,8 @@
     display:inline-block;
     padding:2px 8px;
     border-radius:6px;
-    background:#0f4c5c;
-    border:1px solid #1b6b80;
+    background:#2563eb;
+    border:1px solid #3b82f6;
     color:#fff;
     font-size:.8rem;
     font-weight:700;
@@ -133,8 +133,8 @@
     display:inline-block;
     padding:2px 8px;
     border-radius:6px;
-    background:#8a5a00;
-    border:1px solid #b77700;
+    background:#ea580c;
+    border:1px solid #f97316;
     color:#fff;
     font-size:.8rem;
     font-weight:700;
@@ -144,8 +144,8 @@
     display:inline-block;
     padding:2px 8px;
     border-radius:6px;
-    background:#1f6b3a;
-    border:1px solid #2f9a52;
+    background:#16a34a;
+    border:1px solid #22c55e;
     color:#fff;
     font-size:.8rem;
     font-weight:700;
@@ -453,9 +453,9 @@ header nav a{ color:#fff !important; }
   box-shadow:0 12px 28px rgba(15,23,42,0.10);
 }
 
-#publications .pub-journal{border-left-color:#0f4c5c !important;}
-#publications .pub-conference{border-left-color:#8a5a00 !important;}
-#publications .pub-oralposter{border-left-color:#1f6b3a !important;}
+#publications .pub-journal{border-left-color:#2563eb !important;}
+#publications .pub-conference{border-left-color:#ea580c !important;}
+#publications .pub-oralposter{border-left-color:#f97316 !important;}
 
 #publications .pub-type{
   display:flex;
@@ -480,19 +480,25 @@ header nav a{ color:#fff !important; }
   flex-shrink:0;
 }
 
+/* Journal Paper */
 #publications .marker{
-  background:#0f4c5c;
-  border:1px solid #1b6b80;
+    background:#2563eb;
+    border-color:#3b82f6;
+    color:#fff;
 }
 
+/* Conference Paper */
 #publications .marker2{
-  background:#8a5a00;
-  border:1px solid #b77700;
+    background:#ea580c;
+    border-color:#f97316;
+    color:#fff;
 }
 
+/* Oral / Poster */
 #publications .marker3{
-  background:#1f6b3a;
-  border:1px solid #2f9a52;
+    background:#16a34a;
+    border-color:#22c55e;
+    color:#fff;
 }
 
 #publications .pub-main{
@@ -610,9 +616,17 @@ header nav a{ color:#fff !important; }
   display:inline-block;
 }
 
-#publications .legend-journal{background:#0f4c5c;}
-#publications .legend-conference{background:#8a5a00;}
-#publications .legend-oralposter{background:#1f6b3a;}
+.legend-journal{
+    background:#2563eb;
+}
+
+.legend-conference{
+    background:#ea580c;
+}
+
+.legend-oralposter{
+    background:#16a34a;
+}
 
 @media (max-width: 700px){
   #publications .pub{
