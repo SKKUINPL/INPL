@@ -1910,82 +1910,87 @@ header nav a{ color:#fff !important; }
     </p>
   </div>
 
-  <script>
-    (function publicationsSearch() {
-      const $input = document.getElementById('pubSearch');
-      const $clear = document.getElementById('pubClear');
-      const $list  = document.getElementById('pubList');
-      const $empty = document.getElementById('pubEmpty');
-      const $items = Array.from($list.querySelectorAll('.pub'));
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const input = document.getElementById('pubSearch');
+  const clear = document.getElementById('pubClear');
+  const list = document.getElementById('pubList');
+  const empty = document.getElementById('pubEmpty');
 
-      // 유형 동의어(영/한)
-      const TYPE_SYNONYMS = {
-        journal:    ['journal','저널','논문'],
-        conference: ['conference','컨퍼런스','학회','학술대회'],
-        oral:       ['oral','poster','oral/poster','오랄','구두','포스터']
-      };
+  if (!input || !clear || !list || !empty) {
+    console.error('Publication search elements not found:', { input, clear, list, empty });
+    return;
+  }
 
-      // 문자열 정규화
-      const norm = s => (s||'').toLowerCase().normalize('NFKC').replace(/\s+/g,' ').trim();
+  const items = Array.from(list.querySelectorAll('.pub'));
 
-      // 항목 유형 자동추론: .marker(.marker2/.marker3) → data-type
-      $items.forEach(item => {
-        if (!item.dataset.type) {
-          const m = item.querySelector('.marker, .marker2, .marker3');
-          const t = m ? norm(m.textContent) : '';
-          let type = '';
-          if (t.includes('journal')) type = 'journal';
-          else if (t.includes('conference')) type = 'conference';
-          else if (t.includes('oral') || t.includes('poster')) type = 'oral';
-          item.dataset.type = type || '';
-        }
-      });
+  const norm = s => (s || '')
+    .toLowerCase()
+    .normalize('NFKC')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-      // 토큰을 유형으로 매핑
-      function tokenToType(token){
-        for (const [type, words] of Object.entries(TYPE_SYNONYMS)){
-        if (words.some(w => w.startsWith(token) || token.startsWith(w))) return type;
-        }
-        return null;
-      }
+  const typeSynonyms = {
+    journal: ['journal', 'journal paper', '저널', '논문'],
+    conference: ['conference', 'conference paper', '컨퍼런스', '학회', '학술대회'],
+    oral: ['oral', 'poster', 'oral/poster', 'oral / poster', '오랄', '구두', '포스터']
+  };
 
-      // 필터링 로직
-      function applyFilter(){
-        const q = norm($input.value);
-        const tokens = q ? q.split(' ') : [];
+  function tokenToType(token) {
+    for (const [type, words] of Object.entries(typeSynonyms)) {
+      if (words.some(w => w.includes(token) || token.includes(w))) return type;
+    }
+    return null;
+  }
 
-        // 요청된 유형들(OR)
-        const requestedTypes = new Set(tokens.map(tokenToType).filter(Boolean));
+  items.forEach(item => {
+    const marker = item.querySelector('.marker, .marker2, .marker3');
+    const text = norm(marker ? marker.textContent : '');
 
-        let shown = 0;
-        $items.forEach(item => {
-          const itemType = item.dataset.type || '';
-          const kw   = item.getAttribute('data-keywords') || '';
-          const text = item.textContent || '';
-          const haystack = norm(`${kw} ${text}`);
-          // 유형 매칭
-          const typeOk = requestedTypes.size === 0 ? true : requestedTypes.has(itemType);
+    if (text.includes('journal')) item.dataset.type = 'journal';
+    else if (text.includes('conference')) item.dataset.type = 'conference';
+    else if (text.includes('oral') || text.includes('poster')) item.dataset.type = 'oral';
+    else item.dataset.type = '';
+  });
 
-          // 키워드 AND (유형 토큰 제외)
-          const keywordTokens = tokens.filter(t => !tokenToType(t));
-          const textOk = keywordTokens.every(t => haystack.includes(t));
+  function applyFilter() {
+    const q = norm(input.value);
+    const tokens = q ? q.split(' ') : [];
+    const requestedTypes = new Set(tokens.map(tokenToType).filter(Boolean));
+    const keywordTokens = tokens.filter(t => !tokenToType(t));
 
-          const match = typeOk && textOk;
-          item.style.display = match ? '' : 'none';
-          if (match) shown++;
-        });
+    let shown = 0;
 
-        $empty.style.display = shown === 0 ? '' : 'none';
-      }
+    items.forEach(item => {
+      const itemType = item.dataset.type || '';
+      const haystack = norm(
+        (item.getAttribute('data-keywords') || '') + ' ' + (item.textContent || '')
+      );
 
-      // 이벤트
-      $input.addEventListener('input', applyFilter);
-      $clear.addEventListener('click', () => { $input.value=''; applyFilter(); });
+      const typeOk = requestedTypes.size === 0 || requestedTypes.has(itemType);
+      const textOk = keywordTokens.every(t => haystack.includes(t));
+      const match = typeOk && textOk;
 
-      // 초기 실행
-      applyFilter();
-    })();
-  </script>
+      item.style.display = match ? '' : 'none';
+      if (match) shown++;
+    });
+
+    empty.style.display = shown === 0 ? '' : 'none';
+  }
+
+  input.addEventListener('input', applyFilter);
+  input.addEventListener('search', applyFilter);
+  input.addEventListener('keyup', applyFilter);
+
+  clear.addEventListener('click', function () {
+    input.value = '';
+    applyFilter();
+    input.focus();
+  });
+
+  applyFilter();
+});
+</script>
 </section>
 
 <section id="news" class="section light">
