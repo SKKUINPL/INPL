@@ -1969,10 +1969,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const typeOk = requestedTypes.size === 0 || requestedTypes.has(itemType);
       const textOk = keywordTokens.every(t => haystack.includes(t));
-      const match = typeOk && textOk;
+const match = typeOk && textOk;
 
-      item.style.display = match ? '' : 'none';
-      if (match) shown++;
+item.hidden = !match;
+
+if (match) shown++;
     });
 
     empty.style.display = shown === 0 ? '' : 'none';
