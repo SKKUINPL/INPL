@@ -427,6 +427,207 @@ header nav a:hover{background: rgba(255,255,255,.12) !important; color: #fff !im
 /* 메뉴 링크가 항상 흰색 유지(데스크톱에서도 어두운 히어로에서 잘 보이게) */
 header nav a{ color:#fff !important; }
     
+/* === Publications redesigned cards === */
+#publications .pub-list{
+  display:flex !important;
+  flex-direction:column !important;
+  gap:14px !important;
+}
+
+#publications .pub{
+  display:grid !important;
+  grid-template-columns:132px minmax(0,1fr);
+  gap:16px;
+  align-items:start;
+  padding:18px 20px !important;
+  background:#ffffff !important;
+  border:1px solid #e5e7eb !important;
+  border-left-width:6px !important;
+  border-radius:16px !important;
+  box-shadow:0 6px 18px rgba(15,23,42,0.06);
+  transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+#publications .pub:hover{
+  transform:translateY(-2px);
+  box-shadow:0 12px 28px rgba(15,23,42,0.10);
+}
+
+#publications .pub-journal{border-left-color:#0f4c5c !important;}
+#publications .pub-conference{border-left-color:#8a5a00 !important;}
+#publications .pub-oralposter{border-left-color:#1f6b3a !important;}
+
+#publications .pub-type{
+  display:flex;
+  justify-content:flex-start;
+  align-items:flex-start;
+}
+
+#publications .marker,
+#publications .marker2,
+#publications .marker3{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-width:104px;
+  padding:6px 10px;
+  border-radius:999px;
+  color:#fff;
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:.01em;
+  line-height:1.2;
+  flex-shrink:0;
+}
+
+#publications .marker{
+  background:#0f4c5c;
+  border:1px solid #1b6b80;
+}
+
+#publications .marker2{
+  background:#8a5a00;
+  border:1px solid #b77700;
+}
+
+#publications .marker3{
+  background:#1f6b3a;
+  border:1px solid #2f9a52;
+}
+
+#publications .pub-main{
+  min-width:0;
+}
+
+#publications .pub-title{
+  font-size:1.03rem;
+  font-weight:850;
+  line-height:1.45;
+  color:#111827;
+  margin-bottom:7px;
+}
+
+#publications .pub-authors{
+  font-size:.92rem;
+  color:#374151;
+  margin-bottom:10px;
+}
+
+#publications .pub-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  align-items:center;
+  margin-bottom:6px;
+}
+
+#publications .pub-chip{
+  display:inline-flex;
+  align-items:center;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:750;
+  line-height:1.2;
+  background:#f3f4f6;
+  border:1px solid #e5e7eb;
+  color:#374151;
+}
+
+#publications .pub-venue{
+  background:#eef2ff;
+  border-color:#c7d2fe;
+  color:#3730a3;
+}
+
+#publications .pub-year{
+  background:#ecfeff;
+  border-color:#a5f3fc;
+  color:#155e75;
+}
+
+#publications .pub-if{
+  background:#fff7ed;
+  border-color:#fed7aa;
+  color:#9a3412;
+}
+
+#publications .pub-detail{
+  font-size:.84rem;
+  color:#6b7280;
+  margin-top:4px;
+}
+
+#publications .pub-links{
+  margin-top:10px;
+}
+
+#publications .pub-links a{
+  display:inline-flex;
+  align-items:center;
+  padding:6px 10px;
+  border-radius:9px;
+  background:#1d4ed8;
+  color:#fff !important;
+  font-size:.8rem;
+  font-weight:800;
+  text-decoration:none;
+}
+
+#publications .pub-links a:hover{
+  background:#1e40af;
+  text-decoration:none;
+}
+
+#publications .pub-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin:0 0 18px;
+  padding:12px;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  background:#f9fafb;
+}
+
+#publications .pub-legend .legend-item{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#fff;
+  border:1px solid #e5e7eb;
+  font-size:.86rem;
+  font-weight:750;
+  color:#374151;
+}
+
+#publications .legend-dot{
+  width:11px;
+  height:11px;
+  border-radius:999px;
+  display:inline-block;
+}
+
+#publications .legend-journal{background:#0f4c5c;}
+#publications .legend-conference{background:#8a5a00;}
+#publications .legend-oralposter{background:#1f6b3a;}
+
+@media (max-width: 700px){
+  #publications .pub{
+    grid-template-columns:1fr;
+    gap:10px;
+    padding:16px !important;
+  }
+
+  #publications .marker,
+  #publications .marker2,
+  #publications .marker3{
+    min-width:auto;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -803,334 +1004,980 @@ header nav a{ color:#fff !important; }
       </button>
     </div>
 
+    <div class="pub-legend" aria-label="Publication type legend">
+      <span class="legend-item"><span class="legend-dot legend-journal"></span>Journal</span>
+      <span class="legend-item"><span class="legend-dot legend-conference"></span>Conference</span>
+      <span class="legend-item"><span class="legend-dot legend-oralposter"></span>Oral/Poster</span>
+    </div>
+
     <!-- 목록 -->
     <div id="pubList" class="pub-list" style="display:flex; flex-direction:column; gap:12px">
 <!-- ===== Journal Publications (2026) ===== -->
-<div class="pub" data-keywords="Speech Perception in Self-Produced vs. Observed Speech: A Self-McGurk Paradigm">
-  <span class="marker3">Oral/Poster</span>
-   Kang J, Bae S, Kim J, Sung J and Park H, “Speech Perception in Self-Produced vs. Observed Speech: A Self-McGurk Paradigm” <span class="small-muted">KOSOMBE</span>, May. 2026.
+<div class="pub pub-oralposter" data-keywords="Speech Perception in Self-Produced vs. Observed Speech: A Self-McGurk Paradigm">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Speech Perception in Self-Produced vs. Observed Speech: A Self-McGurk Paradigm”</div>
+    <div class="pub-authors">Kang J, Bae S, Kim J, Sung J and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Characterization of Intensity-Frequency Coding of Electrotactile Feedback Across Cognitive States: Attention and Distraction">
-  <span class="marker3">Oral/Poster</span>
-   Lee J, Sim Y, Qraiqea H and Park H, “Characterization of Intensity-Frequency Coding of Electrotactile Feedback Across Cognitive States: Attention and Distraction” <span class="small-muted">KOSOMBE</span>, May. 2026.
+<div class="pub pub-oralposter" data-keywords="Characterization of Intensity-Frequency Coding of Electrotactile Feedback Across Cognitive States: Attention and Distraction">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Characterization of Intensity-Frequency Coding of Electrotactile Feedback Across Cognitive States: Attention and Distraction”</div>
+    <div class="pub-authors">Lee J, Sim Y, Qraiqea H and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
-      <div class="pub" data-keywords="CYPUS therapy: Causal inference-based Yielding of Peripersonal space Using multiSensory therapy">
-  <span class="marker3">Oral/Poster</span>
-   Oh M, and Park H, “CYPUS therapy: Causal inference-based Yielding of Peripersonal space Using multiSensory therapy” <span class="small-muted">KOSOMBE</span>, May. 2026.
+      <div class="pub pub-oralposter" data-keywords="CYPUS therapy: Causal inference-based Yielding of Peripersonal space Using multiSensory therapy">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“CYPUS therapy: Causal inference-based Yielding of Peripersonal space Using multiSensory therapy”</div>
+    <div class="pub-authors">Oh M, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
-      <div class="pub" data-keywords="Modeling human elbow joint operation under proprioceptive error: a comparison between reinforcement learning and inverse kinematics">
-  <span class="marker3">Oral/Poster</span>
-   Yoo E, and Park H, “Modeling human elbow joint operation under proprioceptive error: a comparison between reinforcement learning and inverse kinematics” <span class="small-muted">KOSOMBE</span>, May. 2026.
+      <div class="pub pub-oralposter" data-keywords="Modeling human elbow joint operation under proprioceptive error: a comparison between reinforcement learning and inverse kinematics">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Modeling human elbow joint operation under proprioceptive error: a comparison between reinforcement learning and inverse kinematics”</div>
+    <div class="pub-authors">Yoo E, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
       
-      <div class="pub" data-keywords="Explicit Attentional Focus on Wrist Angle Disrupts Good Variability and Induces Yips-like Motor Performance Degradation">
-  <span class="marker3">Oral/Poster</span>
-   Kim S, and Park H, “Explicit Attentional Focus on Wrist Angle Disrupts Good Variability and Induces Yips-like Motor Performance Degradation” <span class="small-muted">KOSOMBE</span>, May. 2026.
+      <div class="pub pub-oralposter" data-keywords="Explicit Attentional Focus on Wrist Angle Disrupts Good Variability and Induces Yips-like Motor Performance Degradation">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Explicit Attentional Focus on Wrist Angle Disrupts Good Variability and Induces Yips-like Motor Performance Degradation”</div>
+    <div class="pub-authors">Kim S, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
-      <div class="pub" data-keywords="Quantitative Measurement of Body Schema Changes Following Tool Use Using the Composite Body Schema Score (CBSS)">
-  <span class="marker3">Oral/Poster</span>
-   Park C, and Park H, “Quantitative Measurement of Body Schema Changes Following Tool Use Using the Composite Body Schema Score (CBSS)” <span class="small-muted">KOSOMBE</span>, May. 2026.
+      <div class="pub pub-oralposter" data-keywords="Quantitative Measurement of Body Schema Changes Following Tool Use Using the Composite Body Schema Score (CBSS)">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Quantitative Measurement of Body Schema Changes Following Tool Use Using the Composite Body Schema Score (CBSS)”</div>
+    <div class="pub-authors">Park C, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
-      <div class="pub" data-keywords="E-tactile Feedback Quantified Bidirectional Temporal Relationship in Visuotactile Integration">
-  <span class="marker3">Oral/Poster</span>
-   Jung J, and Park H, “E-tactile Feedback Quantified Bidirectional Temporal Relationship in Visuotactile Integration” <span class="small-muted">KOSOMBE</span>, May. 2026.
+      <div class="pub pub-oralposter" data-keywords="E-tactile Feedback Quantified Bidirectional Temporal Relationship in Visuotactile Integration">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“E-tactile Feedback Quantified Bidirectional Temporal Relationship in Visuotactile Integration”</div>
+    <div class="pub-authors">Jung J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">KOSOMBE</span><span class="pub-chip pub-year">2026</span>
+    </div>
+    <div class="pub-detail">May. 2026</div>
+    
+  </div>
 </div>
 
       <!-- ===== Journal Publications (2025) ===== -->
 
-<div class="pub" data-keywords="Enhancing excavation performance and situational awareness in construction teleoperation using electro-tactile feedback">
-  <span class="marker">Journal</span>
-  Lee JS, Ham Y, Park H and Oh S, “Enhancing excavation performance and situational awareness in construction teleoperation using electro-tactile feedback” <span class="small-muted">Automation in Construction</span>, 177, 106366, 2025.
+<div class="pub pub-journal" data-keywords="Enhancing excavation performance and situational awareness in construction teleoperation using electro-tactile feedback">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Enhancing excavation performance and situational awareness in construction teleoperation using electro-tactile feedback”</div>
+    <div class="pub-authors">Lee JS, Ham Y, Park H and Oh S</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Automation in Construction</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">177, 106366, 2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="CMOS LIF Neurons With Local Membrane Dynamic Biasing Based on Reciprocal Inhibition for Self-Oscillatory Neural Networks">
-  <span class="marker">Journal</span>
-  Cho M, Kang M, Um M, Park H and Lee HM, “CMOS LIF Neurons With Local Membrane Dynamic Biasing Based on Reciprocal Inhibition for Self-Oscillatory Neural Networks” <span class="small-muted">IEEE Transactions on Biomedical Circuits and Systems</span>, 2025.
+<div class="pub pub-journal" data-keywords="CMOS LIF Neurons With Local Membrane Dynamic Biasing Based on Reciprocal Inhibition for Self-Oscillatory Neural Networks">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“CMOS LIF Neurons With Local Membrane Dynamic Biasing Based on Reciprocal Inhibition for Self-Oscillatory Neural Networks”</div>
+    <div class="pub-authors">Cho M, Kang M, Um M, Park H and Lee HM</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Biomedical Circuits and Systems</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Alternate inter-digit finger tapping pattern resembles rudimentary finger grasping pattern">
-  <span class="marker">Journal</span>
-  Manoharan S, Lee JS and Park H, “Alternate inter-digit finger tapping pattern resembles rudimentary finger grasping pattern” <span class="small-muted">Biomedical Engineering Advances</span>, 9, 100183, 2025.
+<div class="pub pub-journal" data-keywords="Alternate inter-digit finger tapping pattern resembles rudimentary finger grasping pattern">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Alternate inter-digit finger tapping pattern resembles rudimentary finger grasping pattern”</div>
+    <div class="pub-authors">Manoharan S, Lee JS and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Biomedical Engineering Advances</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">9, 100183, 2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Soft, stretchable conductive hydrogels for high-performance electronic implants">
-  <span class="marker">Journal</span>
-  Rahman MS, Shon A, Joseph R, Pavlov A, Stefanov A, Namkoong M, <i>et al.</i>, “Soft, stretchable conductive hydrogels for high-performance electronic implants” <span class="small-muted">Science Advances</span>, 11(12), eads4415, 2025.
+<div class="pub pub-journal" data-keywords="Soft, stretchable conductive hydrogels for high-performance electronic implants">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Soft, stretchable conductive hydrogels for high-performance electronic implants”</div>
+    <div class="pub-authors">Rahman MS, Shon A, Joseph R, Pavlov A, Stefanov A, Namkoong M, et al.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Science Advances</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">11(12), eads4415, 2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Postural stability during locomotion is species-specific and dependent on limb posture">
-  <span class="marker">Journal</span>
-  Hanson C, Klishko A, Rahmati SMA, Park H, Prilutsky B and Akay T, “Postural stability during locomotion is species-specific and dependent on limb posture” <span class="small-muted">Integrative and Comparative Biology</span>, 65, S202-S203, 2025.
+<div class="pub pub-journal" data-keywords="Postural stability during locomotion is species-specific and dependent on limb posture">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Postural stability during locomotion is species-specific and dependent on limb posture”</div>
+    <div class="pub-authors">Hanson C, Klishko A, Rahmati SMA, Park H, Prilutsky B and Akay T</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Integrative and Comparative Biology</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">65, S202-S203, 2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Alteration of Mastication Force via Intraoral Closed-loop Electrical Stimulation">
-  <span class="marker">Journal</span>
-  Zheng J, Jiang B, Biswas S, Lee SY, Bumann EE, Lever TE, Kim J and Park H, “Alteration of Mastication Force via Intraoral Closed-loop Electrical Stimulation” <span class="small-muted">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span>, 33, 675-686, 2025.
+<div class="pub pub-journal" data-keywords="Alteration of Mastication Force via Intraoral Closed-loop Electrical Stimulation">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Alteration of Mastication Force via Intraoral Closed-loop Electrical Stimulation”</div>
+    <div class="pub-authors">Zheng J, Jiang B, Biswas S, Lee SY, Bumann EE, Lever TE, Kim J and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">33, 675-686, 2025</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Electro-tactile modulation of muscle activation and intermuscular coordination in the human upper extremity">
-  <span class="marker">Journal</span>
-  Doan H, Tavasoli S, Seo G, Park HS, Park H and Roh J, “Electro-tactile modulation of muscle activation and intermuscular coordination in the human upper extremity” <span class="small-muted">Scientific Reports</span>, 15(1), 2559, 2025.
+<div class="pub pub-journal" data-keywords="Electro-tactile modulation of muscle activation and intermuscular coordination in the human upper extremity">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electro-tactile modulation of muscle activation and intermuscular coordination in the human upper extremity”</div>
+    <div class="pub-authors">Doan H, Tavasoli S, Seo G, Park HS, Park H and Roh J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Scientific Reports</span><span class="pub-chip pub-year">2025</span>
+    </div>
+    <div class="pub-detail">15(1), 2559, 2025</div>
+    
+  </div>
 </div>
       
       
 <!-- ===== Journal Publications (2024) ===== -->
 
-<div class="pub" data-keywords="Electrotactile proprioception training improves finger control accuracy and potential mechanism is proprioceptive recalibration">
-  <span class="marker">Journal</span>
-  Ravichandran R, Patton JL and Park H, “Electrotactile proprioception training improves finger control accuracy and potential mechanism is proprioceptive recalibration” <span class="small-muted">Scientific Reports</span>, 14(1), 26568, 2024.
+<div class="pub pub-journal" data-keywords="Electrotactile proprioception training improves finger control accuracy and potential mechanism is proprioceptive recalibration">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electrotactile proprioception training improves finger control accuracy and potential mechanism is proprioceptive recalibration”</div>
+    <div class="pub-authors">Ravichandran R, Patton JL and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Scientific Reports</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">14(1), 26568, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Transforming the anthropomorphic passive free-flow foot prosthesis into a powered foot prosthesis with intuitive control and sensation (Bionic FFF)">
-  <span class="marker">Journal</span>
-  Pitkin M, Park H, Frossard L, Klishko AN and Prilutsky BI, “Transforming the anthropomorphic passive free-flow foot prosthesis into a powered foot prosthesis with intuitive control and sensation (Bionic FFF)” <span class="small-muted">Military Medicine</span>, 189(Supplement_3), 439-447, 2024.
+<div class="pub pub-journal" data-keywords="Transforming the anthropomorphic passive free-flow foot prosthesis into a powered foot prosthesis with intuitive control and sensation (Bionic FFF)">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Transforming the anthropomorphic passive free-flow foot prosthesis into a powered foot prosthesis with intuitive control and sensation (Bionic FFF)”</div>
+    <div class="pub-authors">Pitkin M, Park H, Frossard L, Klishko AN and Prilutsky BI</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Military Medicine</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">189(Supplement_3), 439-447, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Location-based electrotactile feedback localizes hitting point in virtual-reality table tennis game">
-  <span class="marker">Journal</span>
-  Oh S, Yoon BJ and Park H, “Location-based electrotactile feedback localizes hitting point in virtual-reality table tennis game” <span class="small-muted">Biomedical Engineering Letters</span>, 14(3), 593-604, 2024.
+<div class="pub pub-journal" data-keywords="Location-based electrotactile feedback localizes hitting point in virtual-reality table tennis game">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Location-based electrotactile feedback localizes hitting point in virtual-reality table tennis game”</div>
+    <div class="pub-authors">Oh S, Yoon BJ and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Biomedical Engineering Letters</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">14(3), 593-604, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Proportional sway-based electrotactile feedback improves lateral standing balance">
-  <span class="marker">Journal</span>
-  Raghav Hari Krishna VS, Kim J, Chang SH, Choe Y and Park H, “Proportional sway-based electrotactile feedback improves lateral standing balance” <span class="small-muted">Frontiers in Neuroscience</span>, 18, 1249783, 2024.
+<div class="pub pub-journal" data-keywords="Proportional sway-based electrotactile feedback improves lateral standing balance">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Proportional sway-based electrotactile feedback improves lateral standing balance”</div>
+    <div class="pub-authors">Raghav Hari Krishna VS, Kim J, Chang SH, Choe Y and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Frontiers in Neuroscience</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">18, 1249783, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Reinforcement Learning May Demystify the Limited Human Motor Learning Efficacy Due to Visual-Proprioceptive Mismatch">
-  <span class="marker">Journal</span>
-  Choi K, Choe Y and Park H, “Reinforcement Learning May Demystify the Limited Human Motor Learning Efficacy Due to Visual-Proprioceptive Mismatch” <span class="small-muted">International Journal of Neural Systems</span>, 2450037, 2024.
+<div class="pub pub-journal" data-keywords="Reinforcement Learning May Demystify the Limited Human Motor Learning Efficacy Due to Visual-Proprioceptive Mismatch">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Reinforcement Learning May Demystify the Limited Human Motor Learning Efficacy Due to Visual-Proprioceptive Mismatch”</div>
+    <div class="pub-authors">Choi K, Choe Y and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">International Journal of Neural Systems</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">2450037, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Characterization of perception by transcutaneous electrical stimulation in terms of tingling intensity and temporal dynamics">
-  <span class="marker">Journal</span>
-  Manoharan S and Park H, “Characterization of perception by transcutaneous electrical stimulation in terms of tingling intensity and temporal dynamics” <span class="small-muted">Biomedical Engineering Letters</span>, 14(1), 35-44, 2024.
+<div class="pub pub-journal" data-keywords="Characterization of perception by transcutaneous electrical stimulation in terms of tingling intensity and temporal dynamics">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Characterization of perception by transcutaneous electrical stimulation in terms of tingling intensity and temporal dynamics”</div>
+    <div class="pub-authors">Manoharan S and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Biomedical Engineering Letters</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">14(1), 35-44, 2024</div>
+    
+  </div>
 </div>
 
 <!-- ===== Conference Publications (2024) ===== -->
 
-<div class="pub" data-keywords="Development of the Low-Cost Lightweight Exoskeleton System that Enables Social Interaction Activities in Quadriplegic Patients">
-  <span class="marker2">Conference</span>
-  Irava BA, Aichelmann KJ, Jiang B, Cho H, Park H and Kim J, “Development of the Low-Cost Lightweight Exoskeleton System that Enables Social Interaction Activities in Quadriplegic Patients” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-5, 2024.
+<div class="pub pub-conference" data-keywords="Development of the Low-Cost Lightweight Exoskeleton System that Enables Social Interaction Activities in Quadriplegic Patients">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Development of the Low-Cost Lightweight Exoskeleton System that Enables Social Interaction Activities in Quadriplegic Patients”</div>
+    <div class="pub-authors">Irava BA, Aichelmann KJ, Jiang B, Cho H, Park H and Kim J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-5, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Development of a Real-Time Wireless Multi-Node Metal Pipeline Localization System via Bluetooth Link">
-  <span class="marker2">Conference</span>
-  Jiang B, Choi B, Kuk G, Park H and Kim J, “Development of a Real-Time Wireless Multi-Node Metal Pipeline Localization System via Bluetooth Link” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-5, 2024.
+<div class="pub pub-conference" data-keywords="Development of a Real-Time Wireless Multi-Node Metal Pipeline Localization System via Bluetooth Link">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Development of a Real-Time Wireless Multi-Node Metal Pipeline Localization System via Bluetooth Link”</div>
+    <div class="pub-authors">Jiang B, Choi B, Kuk G, Park H and Kim J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-5, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Commercial-Off-the-Shelf (COTS) Wearable Elbow Joint Angle Measurement System">
-  <span class="marker2">Conference</span>
-  Kim Y, Han S, Lee JW, Kim DY and Park H, “Commercial-Off-the-Shelf (COTS) Wearable Elbow Joint Angle Measurement System” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-4, 2024.
+<div class="pub pub-conference" data-keywords="Commercial-Off-the-Shelf (COTS) Wearable Elbow Joint Angle Measurement System">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Commercial-Off-the-Shelf (COTS) Wearable Elbow Joint Angle Measurement System”</div>
+    <div class="pub-authors">Kim Y, Han S, Lee JW, Kim DY and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-4, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Comparative analysis of hip muscle activation and gait kinematics during motorized and self-propelled treadmill walking">
-  <span class="marker2">Conference</span>
-  Kim M, Park M, Lee J, Rho H and Park H, “Comparative analysis of hip muscle activation and gait kinematics during motorized and self-propelled treadmill walking” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-4, 2024.
+<div class="pub pub-conference" data-keywords="Comparative analysis of hip muscle activation and gait kinematics during motorized and self-propelled treadmill walking">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Comparative analysis of hip muscle activation and gait kinematics during motorized and self-propelled treadmill walking”</div>
+    <div class="pub-authors">Kim M, Park M, Lee J, Rho H and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-4, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Commercial-Off-the-Shelf Force Feedback System to Enhance Teleoperation Control Accuracy">
-  <span class="marker2">Conference</span>
-  Qraiqea H, Lee J and Park H, “Commercial-Off-the-Shelf Force Feedback System to Enhance Teleoperation Control Accuracy” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-4, 2024.
+<div class="pub pub-conference" data-keywords="Commercial-Off-the-Shelf Force Feedback System to Enhance Teleoperation Control Accuracy">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Commercial-Off-the-Shelf Force Feedback System to Enhance Teleoperation Control Accuracy”</div>
+    <div class="pub-authors">Qraiqea H, Lee J and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-4, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="A Reinforcement Learning-Based Computational Model of Human Elbow Joint Operation for Effective Human-Machine Interface">
-  <span class="marker2">Conference</span>
-  Yoo E, Choi K and Park H, “A Reinforcement Learning-Based Computational Model of Human Elbow Joint Operation for Effective Human-Machine Interface” <span class="small-muted">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span>, 1-3, 2024.
+<div class="pub pub-conference" data-keywords="A Reinforcement Learning-Based Computational Model of Human Elbow Joint Operation for Effective Human-Machine Interface">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Reinforcement Learning-Based Computational Model of Human Elbow Joint Operation for Effective Human-Machine Interface”</div>
+    <div class="pub-authors">Yoo E, Choi K and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 IEEE International Conference on Consumer Electronics-Asia (ICCE-Asia)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">1-3, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Assisting sit-to-stand through event-based electrical stimulation of trunk control: A preliminary study">
-  <span class="marker2">Conference</span>
-  Schultz R, Shourijeh MS, Park H, Husain SR, Zhu F, <i>et al.</i>, “Assisting sit-to-stand through event-based electrical stimulation of trunk control: A preliminary study” <span class="small-muted">2024 46th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)</span>, 2024.
+<div class="pub pub-conference" data-keywords="Assisting sit-to-stand through event-based electrical stimulation of trunk control: A preliminary study">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Assisting sit-to-stand through event-based electrical stimulation of trunk control: A preliminary study”</div>
+    <div class="pub-authors">Schultz R, Shourijeh MS, Park H, Husain SR, Zhu F, et al.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">2024 46th Annual International Conference of the IEEE Engineering in Medicine and Biology Society (EMBC)</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="Feedback system for enhancing human-robot interaction performance in construction robots">
-  <span class="marker2">Conference</span>
-  Lee JS, Oh S, Park H and Ham Y, “Feedback system for enhancing human-robot interaction performance in construction robots” <span class="small-muted">Construction Research Congress 2024</span>, 79-88, 2024.
+<div class="pub pub-conference" data-keywords="Feedback system for enhancing human-robot interaction performance in construction robots">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Feedback system for enhancing human-robot interaction performance in construction robots”</div>
+    <div class="pub-authors">Lee JS, Oh S, Park H and Ham Y</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Construction Research Congress 2024</span><span class="pub-chip pub-year">2024</span>
+    </div>
+    <div class="pub-detail">79-88, 2024</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2023 IEEE BioCAS Cho Kang Um Park Lee leaky integrate-and-fire dynamic bias inhibitory self-oscillation">
-  <span class="marker2">Conference</span>
-   Cho M, Kang M, Um M, Park H, and Lee H-M, “CMOS Leaky Integrate-and-Fire Neurons with Local Dynamic Biasing and Inhibitory Self-Oscillation,” <span class="small-muted">Proc. IEEE Biomedical Circuits and Systems Conference (BioCAS)</span>, pp. 1-5, Oct. 2023.
+<div class="pub pub-conference" data-keywords="2023 IEEE BioCAS Cho Kang Um Park Lee leaky integrate-and-fire dynamic bias inhibitory self-oscillation">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“CMOS Leaky Integrate-and-Fire Neurons with Local Dynamic Biasing and Inhibitory Self-Oscillation,”</div>
+    <div class="pub-authors">Cho M, Kang M, Um M, Park H, and Lee H-M</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE Biomedical Circuits and Systems Conference (BioCAS)</span><span class="pub-chip pub-year">2023</span>
+    </div>
+    <div class="pub-detail">pp. 1-5, Oct. 2023</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2023 IEEE EMBS Jiang Dollahon Manoharan Oh Park Kim tongue command accuracy electrotactile feedback training">
-  <span class="marker2">Conference</span>
-   Jiang B, Dollahon D, Manoharan S, Oh S, Park H, and Kim J, “Improving Tongue Command Accuracy: Unlocking the Power of Electrotactile Feedback Training,” <span class="small-muted">Proc. IEEE Engineering in Medicine and Biology Society (EMBS)</span>, Jul. 2023.
+<div class="pub pub-conference" data-keywords="2023 IEEE EMBS Jiang Dollahon Manoharan Oh Park Kim tongue command accuracy electrotactile feedback training">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Improving Tongue Command Accuracy: Unlocking the Power of Electrotactile Feedback Training,”</div>
+    <div class="pub-authors">Jiang B, Dollahon D, Manoharan S, Oh S, Park H, and Kim J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE Engineering in Medicine and Biology Society (EMBS)</span><span class="pub-chip pub-year">2023</span>
+    </div>
+    <div class="pub-detail">Jul. 2023</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2023 IEEE NER Shon Stefanov Hook Park edge AI closed-loop peripheral nerve stimulation gait rehabilitation SCI">
-  <span class="marker2">Conference</span>
-   Shon A, Stefanov A, Hook M, and Park H, “Edge AI-Based Closed-Loop Peripheral Nerve Stimulation System for Gait Rehabilitation after Spinal Cord Injury,” <span class="small-muted">Proc. IEEE EMBS Conference on Neural Engineering (NER)</span>, Apr. 2023.
+<div class="pub pub-conference" data-keywords="2023 IEEE NER Shon Stefanov Hook Park edge AI closed-loop peripheral nerve stimulation gait rehabilitation SCI">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Edge AI-Based Closed-Loop Peripheral Nerve Stimulation System for Gait Rehabilitation after Spinal Cord Injury,”</div>
+    <div class="pub-authors">Shon A, Stefanov A, Hook M, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE EMBS Conference on Neural Engineering (NER)</span><span class="pub-chip pub-year">2023</span>
+    </div>
+    <div class="pub-detail">Apr. 2023</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2023 IEEE Transactions on Circuits and Systems I Lee Eom Park Ku Lee Kim Kim Shon Park Lee neural recording spike scan adaptive electrode selection">
-  <span class="marker">Journal</span>
-   Lee H. S., Eom K, Park M, Ku S. B., Lee K, Kim T, Kim T, Shon Y-M, Park H, and Lee H.-M., “A Multi-Channel Neural Recording System With Neural Spike Scan and Adaptive Electrode Selection for High-Density Neural Interface,” <span class="small-muted">IEEE Transactions on Circuits and Systems I: Regular Papers</span>, Apr. 2023.
+<div class="pub pub-journal" data-keywords="2023 IEEE Transactions on Circuits and Systems I Lee Eom Park Ku Lee Kim Kim Shon Park Lee neural recording spike scan adaptive electrode selection">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Multi-Channel Neural Recording System With Neural Spike Scan and Adaptive Electrode Selection for High-Density Neural Interface,”</div>
+    <div class="pub-authors">Lee H. S., Eom K, Park M, Ku S. B., Lee K, Kim T, Kim T, Shon Y-M, Park H, and Lee H.-M.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Circuits and Systems I: Regular Papers</span><span class="pub-chip pub-year">2023</span>
+    </div>
+    <div class="pub-detail">Apr. 2023</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 Motor Control Park Klishko Oh Zhang Grenga Herrin Dalton Kistenberg Lemay Pitkin DeWeerth Prilutsky tibial nerve stimulation paw pad anesthesia cat">
-  <span class="marker">Journal</span>
-   Park H, Klishko A. N., Oh K, Zhang C, Grenga G, Herrin K. R., Dalton J. F. IV, Kistenberg R. S., Lemay M. A., Pitkin M., DeWeerth S. P., and Prilutsky B. I., “Electrical stimulation of distal tibial nerve during stance phase of walking may reverse effects of unilateral paw pad anesthesia in the cat,” <span class="small-muted">Motor Control</span>, 27(1):71-95, Oct. 2022. — <a href="https://journals.humankinetics.com/view/journals/mcj/27/1/article-p71.xml" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 1.6)</span>.
+<div class="pub pub-journal" data-keywords="2022 Motor Control Park Klishko Oh Zhang Grenga Herrin Dalton Kistenberg Lemay Pitkin DeWeerth Prilutsky tibial nerve stimulation paw pad anesthesia cat">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electrical stimulation of distal tibial nerve during stance phase of walking may reverse effects of unilateral paw pad anesthesia in the cat,”</div>
+    <div class="pub-authors">Park H, Klishko A. N., Oh K, Zhang C, Grenga G, Herrin K. R., Dalton J. F. IV, Kistenberg R. S., Lemay M. A., Pitkin M., DeWeerth S. P., and Prilutsky B. I.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Motor Control</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 1.6</span>
+    </div>
+    <div class="pub-detail">27(1):71-95, Oct. 2022</div>
+    <div class="pub-links"><a href="https://journals.humankinetics.com/view/journals/mcj/27/1/article-p71.xml" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 IEEE Transactions on Industrial Electronics Kim Ham Park underground metal pipeline localization wireless magnetic sensor excavator">
-  <span class="marker">Journal</span>
-   Kim J, Ham Y, and Park H, “Underground Metal Pipeline Localization using Low-cost Wireless Magnetic Sensor Array Mounted on an Excavator,” <span class="small-muted">IEEE Transactions on Industrial Electronics</span>, Oct. 2022. — <a href="https://ieeexplore.ieee.org/abstract/document/9739874/" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 7.4)</span>.
+<div class="pub pub-journal" data-keywords="2022 IEEE Transactions on Industrial Electronics Kim Ham Park underground metal pipeline localization wireless magnetic sensor excavator">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Underground Metal Pipeline Localization using Low-cost Wireless Magnetic Sensor Array Mounted on an Excavator,”</div>
+    <div class="pub-authors">Kim J, Ham Y, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Industrial Electronics</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 7.4</span>
+    </div>
+    <div class="pub-detail">Oct. 2022</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/abstract/document/9739874/" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 Biomedical Engineering Letters Das Park MCU-less biphasic electrical stimulation circuit miniaturized neuromodulator">
-  <span class="marker">Journal</span>
-   Das H and Park H, “MCU-less biphasic electrical stimulation circuit for miniaturized neuromodulator,” <span class="small-muted">Biomedical Engineering Letters</span>, Aug. 2022. — <a href="https://link.springer.com/article/10.1007/s13534-022-00239-7" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 3.4)</span>.
+<div class="pub pub-journal" data-keywords="2022 Biomedical Engineering Letters Das Park MCU-less biphasic electrical stimulation circuit miniaturized neuromodulator">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“MCU-less biphasic electrical stimulation circuit for miniaturized neuromodulator,”</div>
+    <div class="pub-authors">Das H and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Biomedical Engineering Letters</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 3.4</span>
+    </div>
+    <div class="pub-detail">Aug. 2022</div>
+    <div class="pub-links"><a href="https://link.springer.com/article/10.1007/s13534-022-00239-7" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 IEEE EMBS Manoharan Oh Jiang Patton Park electro-prosthetic e-skin finger aperture electrotactile proprioception">
-  <span class="marker2">Conference</span>
-   Manoharan S, Oh S, Jiang B, Patton J, and Park H, “Electro-prosthetic E-skin Successfully Delivers Finger Aperture Distance by Electro-Prosthetic Proprioception (EPP),” <span class="small-muted">Proc. IEEE EMBS</span>, Jul. 2022.
+<div class="pub pub-conference" data-keywords="2022 IEEE EMBS Manoharan Oh Jiang Patton Park electro-prosthetic e-skin finger aperture electrotactile proprioception">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electro-prosthetic E-skin Successfully Delivers Finger Aperture Distance by Electro-Prosthetic Proprioception (EPP),”</div>
+    <div class="pub-authors">Manoharan S, Oh S, Jiang B, Patton J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE EMBS</span><span class="pub-chip pub-year">2022</span>
+    </div>
+    <div class="pub-detail">Jul. 2022</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 IEEE EMBS Oh Patton Park electro-prosthetic e-skin elbow joint angle EPP">
-  <span class="marker2">Conference</span>
-   Oh S, Patton J, and Park H, “Electro-prosthetic E-skin Successfully Delivers Elbow Joint Angle Information by Electro-prosthestic Proprioception (EPP),” <span class="small-muted">Proc. IEEE EMBS</span>, Jul. 2022.
+<div class="pub pub-conference" data-keywords="2022 IEEE EMBS Oh Patton Park electro-prosthetic e-skin elbow joint angle EPP">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electro-prosthetic E-skin Successfully Delivers Elbow Joint Angle Information by Electro-prosthestic Proprioception (EPP),”</div>
+    <div class="pub-authors">Oh S, Patton J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE EMBS</span><span class="pub-chip pub-year">2022</span>
+    </div>
+    <div class="pub-detail">Jul. 2022</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 ICRA Liu Ham Kim Park construction robotics immersive teleoperation multi-user collaboration">
-  <span class="marker2">Conference</span>
-   Liu D, Ham Y, Kim J, and Park H, “Towards a Collaborative Future in Construction Robotics: A Human-centered Study in a Multi-user Immersive Operation and Communication System for Excavation,” <span class="small-muted">Proc. IEEE International Conference on Robotics and Automation (ICRA)</span>, May 2022.
+<div class="pub pub-conference" data-keywords="2022 ICRA Liu Ham Kim Park construction robotics immersive teleoperation multi-user collaboration">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Towards a Collaborative Future in Construction Robotics: A Human-centered Study in a Multi-user Immersive Operation and Communication System for Excavation,”</div>
+    <div class="pub-authors">Liu D, Ham Y, Kim J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE International Conference on Robotics and Automation (ICRA)</span><span class="pub-chip pub-year">2022</span>
+    </div>
+    <div class="pub-detail">May 2022</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 IEEE Transactions on Neural Systems and Rehabilitation Engineering Jiang Kim Park palatal electrotactile display tongue motor learning">
-  <span class="marker">Journal</span>
-   Jiang B, Kim J, and Park H, “Palatal Electrotactile Display Outperforms Visual Display in Tongue Motor learning,” <span class="small-muted">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span>, Mar. 2022 — <a href="https://ieeexplore.ieee.org/abstract/document/9729199" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 5.26)</span>.
+<div class="pub pub-journal" data-keywords="2022 IEEE Transactions on Neural Systems and Rehabilitation Engineering Jiang Kim Park palatal electrotactile display tongue motor learning">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Palatal Electrotactile Display Outperforms Visual Display in Tongue Motor learning,”</div>
+    <div class="pub-authors">Jiang B, Kim J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 5.26</span>
+    </div>
+    <div class="pub-detail">Mar. 2022</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/abstract/document/9729199" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 Automation in Construction Lee Ham Park Kim teleoperation excavator human in the loop automation">
-  <span class="marker">Journal</span>
-   Lee J, Ham Y, Park H, and Kim J, “Challenges, Tasks, and Opportunities in Teleoperation of Excavator towards Human-in-the-loop Construction Automation,” <span class="small-muted">Automation in Construction</span>, 135:104119, Mar. 2022.
+<div class="pub pub-journal" data-keywords="2022 Automation in Construction Lee Ham Park Kim teleoperation excavator human in the loop automation">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Challenges, Tasks, and Opportunities in Teleoperation of Excavator towards Human-in-the-loop Construction Automation,”</div>
+    <div class="pub-authors">Lee J, Ham Y, Park H, and Kim J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Automation in Construction</span><span class="pub-chip pub-year">2022</span>
+    </div>
+    <div class="pub-detail">135:104119, Mar. 2022</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 Frontiers in Neuroscience Mooti Park cervical proprioception vision vestibular head trunk orientation yaw">
-  <span class="marker">Journal</span>
-   Mooti R and Park H, “Contribution of Cervical Proprioception, Vision, and Vestibular Feedback on Reducing Dynamic Head-Trunk Orientation Error in the Yaw Direction,” <span class="small-muted">Frontiers in Neuroscience</span>, 1849, Jan. 2022 — <a href="https://www.frontiersin.org/articles/10.3389/fnins.2021.774448/full" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.68)</span>.
+<div class="pub pub-journal" data-keywords="2022 Frontiers in Neuroscience Mooti Park cervical proprioception vision vestibular head trunk orientation yaw">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Contribution of Cervical Proprioception, Vision, and Vestibular Feedback on Reducing Dynamic Head-Trunk Orientation Error in the Yaw Direction,”</div>
+    <div class="pub-authors">Mooti R and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Frontiers in Neuroscience</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 4.68</span>
+    </div>
+    <div class="pub-detail">1849, Jan. 2022</div>
+    <div class="pub-links"><a href="https://www.frontiersin.org/articles/10.3389/fnins.2021.774448/full" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2022 IEEE Access Dollahon Ryu Park pinching force interaction gain fingertip">
-  <span class="marker">Journal</span>
-   Dollahon D, Ryu S, and Park H, “Pinching Force Changes by Modulating the Interaction Gain over the Fingertip,” <span class="small-muted">IEEE Access</span>, Jan. 2022 — <a href="https://ieeexplore.ieee.org/abstract/document/9684447" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 3.37)</span>.
+<div class="pub pub-journal" data-keywords="2022 IEEE Access Dollahon Ryu Park pinching force interaction gain fingertip">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Pinching Force Changes by Modulating the Interaction Gain over the Fingertip,”</div>
+    <div class="pub-authors">Dollahon D, Ryu S, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Access</span><span class="pub-chip pub-year">2022</span><span class="pub-chip pub-if">IF 3.37</span>
+    </div>
+    <div class="pub-detail">Jan. 2022</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/abstract/document/9684447" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 Sensors Kim Knox Park forehead tactile hallucination risk sensitivity">
-  <span class="marker">Journal</span>
-   Kim J, Knox D, and Park H, “Forehead Tactile Hallucination Is Augmented by the Perceived Risk and Accompanies Increase of Forehead Tactile Sensitivity,” <span class="small-muted">Sensors</span>, 21(24):8246, Dec. 2021.
+<div class="pub pub-journal" data-keywords="2021 Sensors Kim Knox Park forehead tactile hallucination risk sensitivity">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Forehead Tactile Hallucination Is Augmented by the Perceived Risk and Accompanies Increase of Forehead Tactile Sensitivity,”</div>
+    <div class="pub-authors">Kim J, Knox D, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Sensors</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">21(24):8246, Dec. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 UKC Krishna Kim Choe Park electrotactile display lateral balance presentation">
-  <span class="marker3">Oral/Poster</span>
-   Krishna R, Kim J, Choe Y, and Park H, “Proportional-mode Distance-Based Electrotactile Display Improved Lateral Balance,” <span class="small-muted">The US-KOREA Conference on Science, Technology, and Entrepreneurship (UKC)</span>, Dec. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 UKC Krishna Kim Choe Park electrotactile display lateral balance presentation">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Proportional-mode Distance-Based Electrotactile Display Improved Lateral Balance,”</div>
+    <div class="pub-authors">Krishna R, Kim J, Choe Y, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">The US-KOREA Conference on Science, Technology, and Entrepreneurship (UKC)</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Dec. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 SfN Dollahon Park internal model interaction gain feedback distribution asymmetry plantar pressure">
-  <span class="marker3">Oral/Poster</span>
-   Dollahon D and Park H, “Internal Model with Interaction Gain and Feedback Contribution Successfully Interprets Weight Distribution According to the Asymmetry in Plantar Pressure,” <span class="small-muted">Society for Neuroscience (SfN) Annual Meeting</span>, Nov. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 SfN Dollahon Park internal model interaction gain feedback distribution asymmetry plantar pressure">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Internal Model with Interaction Gain and Feedback Contribution Successfully Interprets Weight Distribution According to the Asymmetry in Plantar Pressure,”</div>
+    <div class="pub-authors">Dollahon D and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Society for Neuroscience (SfN) Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Nov. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 SfN Jiang Kim Park tongue motor ability tactile vs visual feedback retention palatal surface">
-  <span class="marker3">Oral/Poster</span>
-   Jiang B, Kim J, and Park H, “Both Tactile and Visual Feedback Improves Tongue Motor Ability in Pointing the Target on Palatal Surface, but Only Tactile Feedback Led to Stronger Retention,” <span class="small-muted">SfN Annual Meeting</span>, Nov. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 SfN Jiang Kim Park tongue motor ability tactile vs visual feedback retention palatal surface">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Both Tactile and Visual Feedback Improves Tongue Motor Ability in Pointing the Target on Palatal Surface, but Only Tactile Feedback Led to Stronger Retention,”</div>
+    <div class="pub-authors">Jiang B, Kim J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">SfN Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Nov. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 SfN Manoharan Park alternating rhythmic finger tapping grasping pattern correlation">
-  <span class="marker3">Oral/Poster</span>
-   Manoharan S and Park H, “Alternating Rhythmic Finger Tapping is Strongly Correlated with Rudimentary Grasping Pattern,” <span class="small-muted">SfN Annual Meeting</span>, Nov. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 SfN Manoharan Park alternating rhythmic finger tapping grasping pattern correlation">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Alternating Rhythmic Finger Tapping is Strongly Correlated with Rudimentary Grasping Pattern,”</div>
+    <div class="pub-authors">Manoharan S and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">SfN Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Nov. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 SfN Ravichandran Patton Park electro-prosthetic proprioception visual proprioceptive matching error finger aperture">
-  <span class="marker3">Oral/Poster</span>
-   Ravichandran R, Patton J, and Park H, “A Novel Electro-prosthetic Proprioception Reduces Visual-Proprioceptive Matching Error for Finger Aperture Control,” <span class="small-muted">SfN Annual Meeting</span>, Nov. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 SfN Ravichandran Patton Park electro-prosthetic proprioception visual proprioceptive matching error finger aperture">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Novel Electro-prosthetic Proprioception Reduces Visual-Proprioceptive Matching Error for Finger Aperture Control,”</div>
+    <div class="pub-authors">Ravichandran R, Patton J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">SfN Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Nov. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 IEEE EMBS Ravichandran Patton Park electro-prosthetic proprioception distance-based finger aperture control">
-  <span class="marker3">Oral/Poster</span>
-   Ravichandran R, Patton J, and Park H, “A Novel Electro-prosthetic Proprioception by Distance-based Electrical Stimulation for Finger Aperture Control,” <span class="small-muted">IEEE Engineering in Medicine and Biology Society (EMBS) Annual Meeting</span>, Oct. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 IEEE EMBS Ravichandran Patton Park electro-prosthetic proprioception distance-based finger aperture control">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Novel Electro-prosthetic Proprioception by Distance-based Electrical Stimulation for Finger Aperture Control,”</div>
+    <div class="pub-authors">Ravichandran R, Patton J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Engineering in Medicine and Biology Society (EMBS) Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Oct. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 IEEE EMBS Zhao Kim Park drawing pattern smartphone pattern lock characterization">
-  <span class="marker3">Oral/Poster</span>
-   Zhao Z, Kim J, and Park H, “Individual Characterization of Drawing Pattern in a Pattern Lock Application of the Smartphone,” <span class="small-muted">IEEE EMBS Annual Meeting</span>, Oct. 2021.
+<div class="pub pub-oralposter" data-keywords="2021 IEEE EMBS Zhao Kim Park drawing pattern smartphone pattern lock characterization">
+  <div class="pub-type">
+    <span class="marker3">Oral/Poster</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Individual Characterization of Drawing Pattern in a Pattern Lock Application of the Smartphone,”</div>
+    <div class="pub-authors">Zhao Z, Kim J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE EMBS Annual Meeting</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">Oct. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 Sensors Barreto Shon Knox Song Park Kim grasshopper gait treadmill optical recording">
-  <span class="marker">Journal</span>
-   Barreto L, Shon A, Knox D, Song H, Park H, and Kim J, “Motorized Treadmill and Optical Recording System for Gait Analysis of Grasshoppers,” <span class="small-muted">Sensors</span>, 21(17):5953, Sep. 2021.
+<div class="pub pub-journal" data-keywords="2021 Sensors Barreto Shon Knox Song Park Kim grasshopper gait treadmill optical recording">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Motorized Treadmill and Optical Recording System for Gait Analysis of Grasshoppers,”</div>
+    <div class="pub-authors">Barreto L, Shon A, Knox D, Song H, Park H, and Kim J</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Sensors</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">21(17):5953, Sep. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 Medical Image Analysis Tang Yang Shajudeen Sears Taraballi Weiner Tasciotti Dollahon Park Righetti CNN 3D spine ultrasound in vivo">
-  <span class="marker">Journal</span>
-   Tang S, Yang X, Shajudeen P, Sears C, Taraballi F, Weiner B, Tasciotti E, Dollahon D, Park H, and Righetti R, “A CNN-based method to reconstruct 3-D spine surfaces from US images in vivo,” <span class="small-muted">Medical Image Analysis</span>, 102221, Sep. 2021.
+<div class="pub pub-journal" data-keywords="2021 Medical Image Analysis Tang Yang Shajudeen Sears Taraballi Weiner Tasciotti Dollahon Park Righetti CNN 3D spine ultrasound in vivo">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A CNN-based method to reconstruct 3-D spine surfaces from US images in vivo,”</div>
+    <div class="pub-authors">Tang S, Yang X, Shajudeen P, Sears C, Taraballi F, Weiner B, Tasciotti E, Dollahon D, Park H, and Righetti R</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Medical Image Analysis</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">102221, Sep. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 Journal of NeuroEngineering and Rehabilitation Rangwani Park proprioceptive illusion transcutaneous electrical stimulation">
-  <span class="marker">Journal</span>
-   Rangwani R and Park H, “A New Approach of Inducing Proprioceptive Illusion by Transcutaneous Electrical Stimulation,” <span class="small-muted">Journal of NeuroEngineering and Rehabilitation</span>, May 2021 — <a href="https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-021-00870-y" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.26)</span>.
+<div class="pub pub-journal" data-keywords="2021 Journal of NeuroEngineering and Rehabilitation Rangwani Park proprioceptive illusion transcutaneous electrical stimulation">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A New Approach of Inducing Proprioceptive Illusion by Transcutaneous Electrical Stimulation,”</div>
+    <div class="pub-authors">Rangwani R and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Journal of NeuroEngineering and Rehabilitation</span><span class="pub-chip pub-year">2021</span><span class="pub-chip pub-if">IF 4.26</span>
+    </div>
+    <div class="pub-detail">May 2021</div>
+    <div class="pub-links"><a href="https://jneuroengrehab.biomedcentral.com/articles/10.1186/s12984-021-00870-y" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 IEEE Transactions on Biomedical Circuits and Systems Shon Brakel Hook Park fully implantable plantar cutaneous augmentation closed-loop nerve stimulation rats">
-  <span class="marker">Journal</span>
-   Shon A, Brakel K, Hook M, and Park H, “Fully Implantable Plantar Cutaneous Augmentation System for Rats using Closed-loop Electrical Nerve Stimulation,” <span class="small-muted">IEEE Transactions on Biomedical Circuits and Systems</span>, Apr. 2021 — <a href="https://ieeexplore.ieee.org/document/9406337" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.29)</span>.
+<div class="pub pub-journal" data-keywords="2021 IEEE Transactions on Biomedical Circuits and Systems Shon Brakel Hook Park fully implantable plantar cutaneous augmentation closed-loop nerve stimulation rats">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Fully Implantable Plantar Cutaneous Augmentation System for Rats using Closed-loop Electrical Nerve Stimulation,”</div>
+    <div class="pub-authors">Shon A, Brakel K, Hook M, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Biomedical Circuits and Systems</span><span class="pub-chip pub-year">2021</span><span class="pub-chip pub-if">IF 4.29</span>
+    </div>
+    <div class="pub-detail">Apr. 2021</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/document/9406337" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 IEEE Transactions on Biomedical Engineering Park Biswas Park electrical characterization tongue soft palate lumped-element intraoral neuromodulation">
-  <span class="marker">Journal</span>
-   Park B, Biswas S, and Park H, “Electrical Characterization of the Tongue and the Soft Palate using Lumped-Element Model for Intraoral Neuromodulation,” <span class="small-muted">IEEE Transactions on Biomedical Engineering</span>, Apr. 2021 — <a href="https://ieeexplore.ieee.org/document/9395207" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.42)</span>.
+<div class="pub pub-journal" data-keywords="2021 IEEE Transactions on Biomedical Engineering Park Biswas Park electrical characterization tongue soft palate lumped-element intraoral neuromodulation">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electrical Characterization of the Tongue and the Soft Palate using Lumped-Element Model for Intraoral Neuromodulation,”</div>
+    <div class="pub-authors">Park B, Biswas S, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Biomedical Engineering</span><span class="pub-chip pub-year">2021</span><span class="pub-chip pub-if">IF 4.42</span>
+    </div>
+    <div class="pub-detail">Apr. 2021</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/document/9395207" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 Military Medicine Pitkin Cassidy Shevtsov Jarrell Park Farrell Dalton Childers Kistenberg Oh Klishko Prilutsky bone-anchored limb prosthetics neural interface">
-  <span class="marker">Journal</span>
-   Pitkin M, Cassidy C, Shevtsov M, Jarrell J, Park H, Farrell B, Dalton J, Childers W. L., Kistenberg R. S., Oh K, Klishko A. N., and Prilutsky B. I., “Recent Progress in Animal Studies of the Skin- and Bone-integrated Pylon With Deep Porosity for Bone-Anchored Limb Prosthetics With and Without Neural Interface,” <span class="small-muted">Military Medicine</span>, 186:688-695, Jan. 2021.
+<div class="pub pub-journal" data-keywords="2021 Military Medicine Pitkin Cassidy Shevtsov Jarrell Park Farrell Dalton Childers Kistenberg Oh Klishko Prilutsky bone-anchored limb prosthetics neural interface">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Recent Progress in Animal Studies of the Skin- and Bone-integrated Pylon With Deep Porosity for Bone-Anchored Limb Prosthetics With and Without Neural Interface,”</div>
+    <div class="pub-authors">Pitkin M, Cassidy C, Shevtsov M, Jarrell J, Park H, Farrell B, Dalton J, Childers W. L., Kistenberg R. S., Oh K, Klishko A. N., and Prilutsky B. I.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Military Medicine</span><span class="pub-chip pub-year">2021</span>
+    </div>
+    <div class="pub-detail">186:688-695, Jan. 2021</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2021 IEEE Transactions on Biomedical Engineering Shon Brakel Hook Park closed-loop plantar cutaneous augmentation ankle plantarflexion treadmill">
-  <span class="marker">Journal</span>
-   Shon A, Brakel K, Hook M, and Park H, “Closed-loop Plantar Cutaneous Augmentation by Electrical Nerve Stimulation could increase Ankle Plantarflexion at Treadmill Walking,” <span class="small-muted">IEEE Transactions on Biomedical Engineering</span>, Jan. 2021 — <a href="https://ieeexplore.ieee.org/document/9336248" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.42)</span>.
+<div class="pub pub-journal" data-keywords="2021 IEEE Transactions on Biomedical Engineering Shon Brakel Hook Park closed-loop plantar cutaneous augmentation ankle plantarflexion treadmill">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Closed-loop Plantar Cutaneous Augmentation by Electrical Nerve Stimulation could increase Ankle Plantarflexion at Treadmill Walking,”</div>
+    <div class="pub-authors">Shon A, Brakel K, Hook M, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Biomedical Engineering</span><span class="pub-chip pub-year">2021</span><span class="pub-chip pub-if">IF 4.42</span>
+    </div>
+    <div class="pub-detail">Jan. 2021</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/document/9336248" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 IEEE Transactions on Neural Systems and Rehabilitation Engineering Azbell Park Deutz Cruthirds Kirschner Madigan Engelen postural balance tactile augmentation cognitive load featured">
-  <span class="marker">Journal</span>
-   Azbell J, Park J. K., Deutz D. E., Cruthirds C. L., Kirschner S. K., Park H, Madigan M. L., and Engelen M. P., “Plantar or Palmar Tactile Augmentation Improves Lateral Postural Balance with Significant Influence from Cognitive Load,” <span class="small-muted">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span>, Nov. 2020 — <a href="https://ieeexplore.ieee.org/abstract/document/9253626" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 3.80)</span>.
+<div class="pub pub-journal" data-keywords="2020 IEEE Transactions on Neural Systems and Rehabilitation Engineering Azbell Park Deutz Cruthirds Kirschner Madigan Engelen postural balance tactile augmentation cognitive load featured">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Plantar or Palmar Tactile Augmentation Improves Lateral Postural Balance with Significant Influence from Cognitive Load,”</div>
+    <div class="pub-authors">Azbell J, Park J. K., Deutz D. E., Cruthirds C. L., Kirschner S. K., Park H, Madigan M. L., and Engelen M. P.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Transactions on Neural Systems and Rehabilitation Engineering</span><span class="pub-chip pub-year">2020</span><span class="pub-chip pub-if">IF 3.80</span>
+    </div>
+    <div class="pub-detail">Nov. 2020</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/abstract/document/9253626" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 Journal of the Royal Society Interface Latash Barnett Park Rider Klishko Prilutsky Molkov frontal plane dynamics split-belt quadrupedal locomotion">
-  <span class="marker">Journal</span>
-   Latash E. M., Barnett W. H., Park H, Rider J. M., Klishko A. N., Prilutsky B. I., and Molkov Y. I., “Frontal plane dynamics of the centre of mass during quadrupedal locomotion on a split-belt treadmill,” <span class="small-muted">Journal of the Royal Society Interface</span>, Sep. 2020.
+<div class="pub pub-journal" data-keywords="2020 Journal of the Royal Society Interface Latash Barnett Park Rider Klishko Prilutsky Molkov frontal plane dynamics split-belt quadrupedal locomotion">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Frontal plane dynamics of the centre of mass during quadrupedal locomotion on a split-belt treadmill,”</div>
+    <div class="pub-authors">Latash E. M., Barnett W. H., Park H, Rider J. M., Klishko A. N., Prilutsky B. I., and Molkov Y. I.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Journal of the Royal Society Interface</span><span class="pub-chip pub-year">2020</span>
+    </div>
+    <div class="pub-detail">Sep. 2020</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 IEEE Sensors Journal Jiang Kim Park midas touch tongue-controlled assistive technology tracer-free">
-  <span class="marker">Journal</span>
-   Jiang B, Kim J, and Park H, “A New Approach of Minimizing Midas Touch Problem for a Tracer-Free Tongue-Controlled Assistive Technology,” <span class="small-muted">IEEE Sensors Journal</span>, 21(1), Aug. 2020 — <a href="https://ieeexplore.ieee.org/abstract/document/9154735" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 3.08)</span>.
+<div class="pub pub-journal" data-keywords="2020 IEEE Sensors Journal Jiang Kim Park midas touch tongue-controlled assistive technology tracer-free">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A New Approach of Minimizing Midas Touch Problem for a Tracer-Free Tongue-Controlled Assistive Technology,”</div>
+    <div class="pub-authors">Jiang B, Kim J, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">IEEE Sensors Journal</span><span class="pub-chip pub-year">2020</span><span class="pub-chip pub-if">IF 3.08</span>
+    </div>
+    <div class="pub-detail">21(1), Aug. 2020</div>
+    <div class="pub-links"><a href="https://ieeexplore.ieee.org/abstract/document/9154735" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 IEEE EMBS Dollahon Ryu Park computational internal model sensorimotor augmentation motor output">
-  <span class="marker2">Conference</span>
-   Dollahon D, Ryu S, and Park H, “A Computational Internal Model to Quantify the Effect of Sensorimotor Augmentation on Motor Output,” <span class="small-muted">Proc. IEEE EMBS</span>, Jul. 2020.
+<div class="pub pub-conference" data-keywords="2020 IEEE EMBS Dollahon Ryu Park computational internal model sensorimotor augmentation motor output">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Computational Internal Model to Quantify the Effect of Sensorimotor Augmentation on Motor Output,”</div>
+    <div class="pub-authors">Dollahon D, Ryu S, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE EMBS</span><span class="pub-chip pub-year">2020</span>
+    </div>
+    <div class="pub-detail">Jul. 2020</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 IEEE EMBS Lee Park Lee multi-channel neural recording adaptive electrode selection high-density interface">
-  <span class="marker2">Conference</span>
-   Lee H, Park H, and Lee H, “A Multi-Channel Neural Recording System with Adaptive Electrode Selection for High-Density Neural Interface,” <span class="small-muted">Proc. IEEE EMBS</span>, Jul. 2020.
+<div class="pub pub-conference" data-keywords="2020 IEEE EMBS Lee Park Lee multi-channel neural recording adaptive electrode selection high-density interface">
+  <div class="pub-type">
+    <span class="marker2">Conference</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“A Multi-Channel Neural Recording System with Adaptive Electrode Selection for High-Density Neural Interface,”</div>
+    <div class="pub-authors">Lee H, Park H, and Lee H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Proc. IEEE EMBS</span><span class="pub-chip pub-year">2020</span>
+    </div>
+    <div class="pub-detail">Jul. 2020</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 Journal of Clinical Medicine Park Deutz Cruthirds Kirschner Park Madigan Engelen COPD postural functional balance risk factors">
-  <span class="marker">Journal</span>
-   Park J. K., Deutz D. E., Cruthirds C. L., Kirschner S. K., Park H, Madigan M. L., and Engelen M. P., “Risk Factors for Postural and Functional Balance Impairment in Patients with Chronic Obstructive Pulmonary Disease,” <span class="small-muted">Journal of Clinical Medicine</span>, Feb. 2020.
+<div class="pub pub-journal" data-keywords="2020 Journal of Clinical Medicine Park Deutz Cruthirds Kirschner Park Madigan Engelen COPD postural functional balance risk factors">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Risk Factors for Postural and Functional Balance Impairment in Patients with Chronic Obstructive Pulmonary Disease,”</div>
+    <div class="pub-authors">Park J. K., Deutz D. E., Cruthirds C. L., Kirschner S. K., Park H, Madigan M. L., and Engelen M. P.</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Journal of Clinical Medicine</span><span class="pub-chip pub-year">2020</span>
+    </div>
+    <div class="pub-detail">Feb. 2020</div>
+    
+  </div>
 </div>
 
-<div class="pub" data-keywords="2020 Scientific Reports Zhao Yeo Manoharan Ryu Park artificial proximity sensation telerobotic pinch">
-  <span class="marker">Journal</span>
-   Zhao A, Yeo M, Manoharan S, Ryu S, and Park H, “Electrically-Evoked Artificial Proximity Sensation Enhanced Fine Finger Control in Telerobotic Pinch,” <span class="small-muted">Scientific Reports</span>, Jan. 2020 — <a href="https://www.nature.com/articles/s41598-019-56985-9" target="_blank" rel="noopener">link</a> <span class="small-muted">(IF: 4.38)</span>.
+<div class="pub pub-journal" data-keywords="2020 Scientific Reports Zhao Yeo Manoharan Ryu Park artificial proximity sensation telerobotic pinch">
+  <div class="pub-type">
+    <span class="marker">Journal</span>
+  </div>
+  <div class="pub-main">
+    <div class="pub-title">“Electrically-Evoked Artificial Proximity Sensation Enhanced Fine Finger Control in Telerobotic Pinch,”</div>
+    <div class="pub-authors">Zhao A, Yeo M, Manoharan S, Ryu S, and Park H</div>
+    <div class="pub-meta">
+      <span class="pub-chip pub-venue">Scientific Reports</span><span class="pub-chip pub-year">2020</span><span class="pub-chip pub-if">IF 4.38</span>
+    </div>
+    <div class="pub-detail">Jan. 2020</div>
+    <div class="pub-links"><a href="https://www.nature.com/articles/s41598-019-56985-9" target="_blank" rel="noopener">Link</a></div>
+  </div>
 </div>
     </div>
 
