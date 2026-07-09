@@ -1970,9 +1970,14 @@ document.addEventListener('DOMContentLoaded', function () {
       const textOk = keywordTokens.every(t => haystack.includes(t));
 const match = typeOk && textOk;
 
-item.hidden = !match;
-
-if (match) shown++;
+      if (match) {
+        item.style.removeProperty('display');
+        item.removeAttribute('aria-hidden');
+        shown++;
+      } else {
+        item.style.setProperty('display', 'none', 'important');
+        item.setAttribute('aria-hidden', 'true');
+      }
     });
 
     empty.style.display = shown === 0 ? '' : 'none';
