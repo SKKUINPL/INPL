@@ -2052,10 +2052,10 @@ const match = typeOk && textOk;
         <caption class="patent-sr-only">연구실 특허 목록</caption>
         <thead>
           <tr>
-            <th scope="col">제목</th>
-            <th scope="col">특허번호</th>
-            <th scope="col">출원날짜</th>
-            <th scope="col">국가</th>
+            <th scope="col">Patent Title</th>
+            <th scope="col">Patent Number</th>
+            <th scope="col">Filing Date</th>
+            <th scope="col">Country</th>
           </tr>
         </thead>
         <tbody id="patentTableBody"></tbody>
@@ -2111,33 +2111,33 @@ const match = typeOk && textOk;
     </figure>
 
     <div class="patent-summary">
-      <h4>요약정보</h4>
+      <h4>Summary</h4>
       <p id="patentDetailSummary"></p>
     </div>
 
     <dl class="patent-details">
       <div>
-        <dt>영문명</dt>
+        <dt>English Title</dt>
         <dd id="patentDetailEnglishTitle"></dd>
       </div>
       <div>
-        <dt>출원번호</dt>
+        <dt>Patent Number</dt>
         <dd id="patentDetailApplicationNumber"></dd>
       </div>
       <div>
-        <dt>출원일자</dt>
+        <dt>Filing Date</dt>
         <dd id="patentDetailApplicationDate"></dd>
       </div>
       <div>
-        <dt>발명자</dt>
+        <dt>Inventors</dt>
         <dd id="patentDetailInventors"></dd>
       </div>
       <div>
-        <dt>등록기관</dt>
+        <dt>Applicant</dt>
         <dd id="patentDetailOffice"></dd>
       </div>
       <div>
-        <dt>출원국가</dt>
+        <dt>Country of Filing</dt>
         <dd id="patentDetailCountry"></dd>
       </div>
     </dl>
@@ -2453,26 +2453,28 @@ const match = typeOk && textOk;
     {
       title: "저작-삼킴-호흡 정보 기반 폐회로 자극 생성 방법 및 장치",
       patentNumber: "10-2025-0182470",
-      applicationDate: "2025-11-27",
+      applicationDate: "2025.11.27",
       country: "대한민국",
       image: "PatentPhoto/1127.png",
       summary:
         "본 발명은 저작-삼킴-호흡 정보를 실시간으로 측정하고, 이에 기반하여 자극을 인가함으로써 감각을 증강하고 운동을 유도하는 폐회로(closed-loop) 자극 생성 알고리즘임.",
       englishTitle:
         "Method and Apparatus for Generating Closed-Loop Stimulation Based on Mastication, Swallowing and Breathing Information",
+            applicationNumber: "10-2025-0182470",
       inventors: "박한규, 강지승, 정준혁, 김세민",
-      Applicant: "성균관대학교 산학협력단",
+      office: "성균관대학교 산학협력단",
     },
     {
       title: "음식물별 저작 및 연하 기능 증강을 위한 전기 자극 방법 및 장치",
       patentNumber: "10-2025-0182541",
-      applicationDate: "2025-11-26",
+      applicationDate: "2025.11.26",
       country: "대한민국",
       image: "PatentPhoto/1126.png",
       summary:
         "본 발명은 식품의 물성(강도, 점성, 파절성)에 기초하여 저작과 연하 기능을 실시간으로 최적화하는 폐루프 알고리즘 및 시스템에 관한 것이다. 웨어러블 감지 장치로부터 수집되는 다중 생체신호를 통해 음식물의 물성을 추정하고, 이에 따라 목표 저작력 파형과 목표 연하 압력 파형을 각각 동적으로 설정·가동함",
       englishTitle:
         "METHOD AND APPARATUS FOR FOOD-SPECIFIC ENHANCEMENT OF CHEWING AND SWALLOWING FUNCTIONS BY ELECTRICAL STIMULATION",
+                  applicationNumber: "10-2025-0182541",
       inventors: "박한규, 강지승, 정준혁, 김세민",
       office: "성균관대학교 산학협력단",
     },
@@ -2486,6 +2488,7 @@ const match = typeOk && textOk;
         "본 발명은 비침습적 전기자극을 통해 턱끝혀근의 수축 및 강화를 유도하여 상기도의 개방성을 확보하고, 수면 중 기도 폐쇄를 방지함으로써 폐쇄성 수면무호흡을 물리적으로 치료하기 위한 전기자극장치임.",
       englishTitle:
         "Non-Invasive Electrical Stimulation Device for Genioglossus Muscle Strengthening",
+                        applicationNumber: "10-2025-0182470",
       inventors: "박한규, 김정훈",
       office: "서울대학교병원, 성균관대학교 산학협력단",
     },
@@ -2499,6 +2502,7 @@ const match = typeOk && textOk;
         "본 발명은 피부에 전기자극을 인가하여 촉각 정보를 전달하고, 자극의 세기와 패턴을 조절함으로써 사용자가 다양한 촉각 피드백을 인지할 수 있도록 하는 전기촉각 제공장치 및 방법임.",
       englishTitle:
         "Electrotactile Stimulation Device and Method Thereof",
+                            applicationNumber: "10-2024-0047046",
       inventors: "박한규",
       office: "성균관대학교 산학협력단",
     },
@@ -2512,6 +2516,7 @@ const match = typeOk && textOk;
         "본 발명은 골프 스윙 동작 정보를 기반으로 신체에 촉각 자극을 제공하여 올바른 자세와 움직임을 직관적으로 안내하고, 반복 훈련을 통해 스윙의 정확성과 일관성을 향상시키기 위한 골프 강습 시스템 및 방법임.",
       englishTitle:
         "Golf Training System Using Tactile Stimulation and Golf Training Method Using the Same",
+                          applicationNumber: "10-2023-0064103",
       inventors: "박한규, 박진형",
       office: "성균관대학교 산학협력단",
     }
