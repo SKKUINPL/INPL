@@ -663,6 +663,7 @@ header nav a{ color:#fff !important; }
             <li><a href="#people">People</a></li>
             <li><a href="#research">Current Research</a></li>
             <li><a href="#publications">Publications</a></li>
+            <li><a href="#patents">Patents</a></li>
             <li><a href="#news">News</a></li>
           </ul>
         </nav>
@@ -2041,6 +2042,613 @@ const match = typeOk && textOk;
 </script>
 </section>
 
+<!-- ==================== PATENTS ==================== -->
+<section id="patents" class="section light" hidden>
+  <div class="container">
+    <h2>Patents</h2>
+
+    <div class="patent-table-wrap">
+      <table class="patent-table">
+        <caption class="patent-sr-only">연구실 특허 목록</caption>
+        <thead>
+          <tr>
+            <th scope="col">제목</th>
+            <th scope="col">특허번호</th>
+            <th scope="col">출원날짜</th>
+            <th scope="col">국가</th>
+          </tr>
+        </thead>
+        <tbody id="patentTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 상세 창은 main의 섹션 숨김 처리에 영향을 받지 않음 -->
+<dialog id="patentDialog" aria-labelledby="patentDetailTitle">
+  <div class="patent-dialog-inner">
+    <div class="patent-dialog-header">
+      <span>PATENT DETAILS</span>
+      <button
+        type="button"
+        id="patentCloseButton"
+        aria-label="특허 상세 정보 닫기"
+        autofocus
+      >✕</button>
+    </div>
+
+    <h3 id="patentDetailTitle"></h3>
+
+    <figure class="patent-figure">
+      <img id="patentDetailImage" alt="">
+      <div id="patentImagePlaceholder" hidden>
+        <svg
+          viewBox="0 0 240 130"
+          width="240"
+          height="130"
+          aria-hidden="true"
+        >
+          <rect
+            x="15" y="40" width="65" height="50" rx="8"
+            fill="#eff6ff" stroke="#2563eb" stroke-width="2"
+          />
+          <path
+            d="M80 65 H155"
+            fill="none" stroke="#2563eb" stroke-width="2"
+          />
+          <circle
+            cx="185" cy="65" r="30"
+            fill="#eff6ff" stroke="#2563eb" stroke-width="2"
+          />
+          <path
+            d="M25 65 H35 L42 52 L51 78 L59 60 H70"
+            fill="none" stroke="#2563eb" stroke-width="2"
+          />
+        </svg>
+        <span>예시 도면 영역</span>
+        <small>실제 도면 이미지 경로를 입력해 주세요.</small>
+      </div>
+    </figure>
+
+    <div class="patent-summary">
+      <h4>요약정보</h4>
+      <p id="patentDetailSummary"></p>
+    </div>
+
+    <dl class="patent-details">
+      <div>
+        <dt>영문명</dt>
+        <dd id="patentDetailEnglishTitle"></dd>
+      </div>
+      <div>
+        <dt>출원번호</dt>
+        <dd id="patentDetailApplicationNumber"></dd>
+      </div>
+      <div>
+        <dt>출원일자</dt>
+        <dd id="patentDetailApplicationDate"></dd>
+      </div>
+      <div>
+        <dt>발명자</dt>
+        <dd id="patentDetailInventors"></dd>
+      </div>
+      <div>
+        <dt>등록기관</dt>
+        <dd id="patentDetailOffice"></dd>
+      </div>
+      <div>
+        <dt>출원국가</dt>
+        <dd id="patentDetailCountry"></dd>
+      </div>
+    </dl>
+  </div>
+</dialog>
+
+<style>
+  #patents {
+    min-height: 75vh;
+    padding-bottom: 100px;
+  }
+
+  #patents .patent-table-wrap {
+    margin-top: 30px;
+    overflow-x: auto;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fff;
+  }
+
+  #patents .patent-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: #111827;
+  }
+
+  #patents .patent-table th {
+    padding: 17px 20px;
+    background: #f3f6fb;
+    border-bottom: 2px solid #1e40af;
+    color: #1e3a8a;
+    font-size: .9rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  #patents .patent-table td {
+    padding: 22px 20px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: .92rem;
+    vertical-align: middle;
+  }
+
+  #patents .patent-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  #patents .patent-table th:first-child {
+    width: 52%;
+  }
+
+  #patents .patent-table td:not(:first-child) {
+    white-space: nowrap;
+    color: #64748b;
+  }
+
+  #patents .patent-row {
+    cursor: pointer;
+    transition: background .18s ease;
+  }
+
+  #patents .patent-row:hover,
+  #patents .patent-row:focus-within {
+    background: #eff6ff;
+  }
+
+  #patents .patent-title-button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: #111827;
+    font: inherit;
+    font-weight: 700;
+    line-height: 1.7;
+    text-align: left;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+  }
+
+  #patents .patent-row:hover .patent-title-button {
+    color: #1d4ed8;
+  }
+
+  #patents .patent-title-button:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 5px;
+    border-radius: 3px;
+  }
+
+  .patent-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  #patentDialog {
+    width: min(860px, calc(100% - 32px));
+    max-height: 88vh;
+    max-height: 88dvh;
+    padding: 0;
+    border: none;
+    border-radius: 20px;
+    background: #fff;
+    color: #111827;
+    box-shadow: 0 30px 100px rgba(0, 0, 0, .3);
+    overflow-y: auto;
+  }
+
+  #patentDialog::backdrop {
+    background: rgba(8, 15, 30, .7);
+    backdrop-filter: blur(5px);
+  }
+
+  #patentDialog .patent-dialog-inner {
+    padding: 30px;
+  }
+
+  #patentDialog .patent-dialog-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: #1e40af;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+  }
+
+  #patentCloseButton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid #e5e7eb;
+    border-radius: 50%;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  #patentCloseButton:hover {
+    background: #e2e8f0;
+  }
+
+  #patentDialog #patentDetailTitle {
+    margin: 18px 0 24px;
+    font-size: clamp(22px, 3vw, 30px);
+    line-height: 1.5;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+  }
+
+  #patentDialog .patent-figure {
+    margin: 0 0 26px;
+    padding: 24px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8fafc;
+  }
+
+  #patentDetailImage {
+    display: block;
+    max-width: 100%;
+    max-height: 420px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+
+  #patentImagePlaceholder {
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    color: #475569;
+  }
+
+  #patentImagePlaceholder span {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  #patentImagePlaceholder small {
+    color: #64748b;
+  }
+
+  #patentDialog .patent-summary {
+    margin-bottom: 26px;
+    padding: 20px;
+    border-left: 4px solid #2563eb;
+    border-radius: 0 12px 12px 0;
+    background: #eff6ff;
+  }
+
+  #patentDialog .patent-summary h4 {
+    margin: 0 0 10px;
+    color: #1e40af;
+    font-size: 1rem;
+  }
+
+  #patentDialog .patent-summary p {
+    margin: 0;
+    color: #334155;
+    font-size: .95rem;
+    line-height: 1.9;
+    white-space: pre-line;
+    overflow-wrap: anywhere;
+  }
+
+  #patentDialog .patent-details {
+    margin: 0;
+    border-top: 2px solid #1e40af;
+  }
+
+  #patentDialog .patent-details > div {
+    display: grid;
+    grid-template-columns: 125px minmax(0, 1fr);
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  #patentDialog .patent-details dt,
+  #patentDialog .patent-details dd {
+    margin: 0;
+    padding: 16px;
+    font-size: .92rem;
+    line-height: 1.7;
+  }
+
+  #patentDialog .patent-details dt {
+    background: #f8fafc;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  #patentDialog .patent-details dd {
+    color: #111827;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+  }
+
+  @media (max-width: 700px) {
+    #patents .patent-table {
+      min-width: 680px;
+    }
+
+    #patents .patent-table th,
+    #patents .patent-table td {
+      padding: 16px;
+    }
+
+    #patentDialog .patent-dialog-inner {
+      padding: 20px;
+    }
+
+    #patentDialog .patent-figure {
+      padding: 14px;
+    }
+
+    #patentDialog .patent-details > div {
+      grid-template-columns: 95px minmax(0, 1fr);
+    }
+
+    #patentDialog .patent-details dt,
+    #patentDialog .patent-details dd {
+      padding: 13px 10px;
+      font-size: .85rem;
+    }
+  }
+</style>
+
+<script>
+(function initPatents() {
+  "use strict";
+
+  /*
+   * ==================================================
+   * 특허 정보 수정 영역
+   * 아래 내용은 모두 가상 예시입니다.
+   *
+   * title             : 제목
+   * patentNumber      : 목록에 표시할 특허번호
+   * applicationDate   : 출원일자 (YYYY-MM-DD)
+   * country           : 출원국가
+   * image             : 도면 이미지 경로
+   * summary           : 요약정보
+   * englishTitle      : 영문명
+   * applicationNumber : 출원번호
+   * inventors         : 발명자
+   * office            : 등록기관
+   *
+   * 이미지 경로 예: "PatentPhoto/patent01.png"
+   * 이미지가 없으면 ""로 두세요.
+   * 특허를 추가하려면 객체 { ... } 하나를 복사하세요.
+   * ==================================================
+   */
+
+  const PATENT_DATA = [
+    {
+      title: "저작-삼킴-호흡 정보 기반 폐회로 자극 생성 방법 및 장치",
+      patentNumber: "10-2025-0182470",
+      applicationDate: "2025-11-27",
+      country: "대한민국",
+      image: "PatentPhoto/1127.png",
+      summary:
+        "본 발명은 저작-삼킴-호흡 정보를 실시간으로 측정하고, 이에 기반하여 자극을 인가함으로써 감각을 증강하고 운동을 유도하는 폐회로(closed-loop) 자극 생성 알고리즘임.",
+      englishTitle:
+        "Method and Apparatus for Generating Closed-Loop Stimulation Based on Mastication, Swallowing and Breathing Information",
+      inventors: "박한규, 강지승, 정준혁, 김세민",
+      Applicant: "성균관대학교 산학협력단",
+    },
+    {
+      title: "음식물별 저작 및 연하 기능 증강을 위한 전기 자극 방법 및 장치",
+      patentNumber: "10-2025-0182541",
+      applicationDate: "2025-11-26",
+      country: "대한민국",
+      image: "PatentPhoto/1126.png",
+      summary:
+        "본 발명은 식품의 물성(강도, 점성, 파절성)에 기초하여 저작과 연하 기능을 실시간으로 최적화하는 폐루프 알고리즘 및 시스템에 관한 것이다. 웨어러블 감지 장치로부터 수집되는 다중 생체신호를 통해 음식물의 물성을 추정하고, 이에 따라 목표 저작력 파형과 목표 연하 압력 파형을 각각 동적으로 설정·가동함",
+      englishTitle:
+        "METHOD AND APPARATUS FOR FOOD-SPECIFIC ENHANCEMENT OF CHEWING AND SWALLOWING FUNCTIONS BY ELECTRICAL STIMULATION",
+      inventors: "박한규, 강지승, 정준혁, 김세민",
+      office: "성균관대학교 산학협력단",
+    },
+    {
+      title: "턱끝혀근 강화용 비침습적 전기 자극장치",
+      patentNumber: "10-2025-0182470",
+      applicationDate: "2025.10.29",
+      country: "대한민국",
+      image: "PatentPhoto/1029.png",
+      summary:
+        "본 발명은 비침습적 전기자극을 통해 턱끝혀근의 수축 및 강화를 유도하여 상기도의 개방성을 확보하고, 수면 중 기도 폐쇄를 방지함으로써 폐쇄성 수면무호흡을 물리적으로 치료하기 위한 전기자극장치임.",
+      englishTitle:
+        "Non-Invasive Electrical Stimulation Device for Genioglossus Muscle Strengthening",
+      inventors: "박한규, 김정훈",
+      office: "서울대학교병원, 성균관대학교 산학협력단",
+    },
+        {
+      title: "전기촉각 제공장치 및 그 방법",
+      patentNumber: "10-2024-0047046",
+      applicationDate: "2024.04.08",
+      country: "대한민국",
+      image: "PatentPhoto/0408.png",
+      summary:
+        "본 발명은 피부에 전기자극을 인가하여 촉각 정보를 전달하고, 자극의 세기와 패턴을 조절함으로써 사용자가 다양한 촉각 피드백을 인지할 수 있도록 하는 전기촉각 제공장치 및 방법임.",
+      englishTitle:
+        "Electrotactile Stimulation Device and Method Thereof",
+      inventors: "박한규",
+      office: "성균관대학교 산학협력단",
+    },
+      {
+      title: "촉각 자극을 이용한 골프 강습 시스템 및 이를 이용한 골프 강습 방법",
+      patentNumber: "10-2023-0064103",
+      applicationDate: "2023.05.18",
+      country: "대한민국",
+      image: "PatentPhoto/0518.png",
+      summary:
+        "본 발명은 골프 스윙 동작 정보를 기반으로 신체에 촉각 자극을 제공하여 올바른 자세와 움직임을 직관적으로 안내하고, 반복 훈련을 통해 스윙의 정확성과 일관성을 향상시키기 위한 골프 강습 시스템 및 방법임.",
+      englishTitle:
+        "Golf Training System Using Tactile Stimulation and Golf Training Method Using the Same",
+      inventors: "박한규, 박진형",
+      office: "성균관대학교 산학협력단",
+    }
+  ];
+
+  // 출원일자 기준 최신순
+  PATENT_DATA.sort(function(a, b) {
+    return b.applicationDate.localeCompare(a.applicationDate);
+  });
+
+  const tableBody = document.getElementById("patentTableBody");
+  const dialog = document.getElementById("patentDialog");
+  const closeButton = document.getElementById("patentCloseButton");
+  const detailImage = document.getElementById("patentDetailImage");
+  const imagePlaceholder =
+    document.getElementById("patentImagePlaceholder");
+
+  let lastFocusedElement = null;
+  let previousBodyOverflow = "";
+
+  function setText(id, value) {
+    document.getElementById(id).textContent = value || "—";
+  }
+
+  function showImagePlaceholder() {
+    detailImage.hidden = true;
+    imagePlaceholder.hidden = false;
+  }
+
+  detailImage.addEventListener("error", showImagePlaceholder);
+
+  function openPatent(patent, trigger) {
+    lastFocusedElement = trigger || document.activeElement;
+
+    setText("patentDetailTitle", patent.title);
+    setText("patentDetailSummary", patent.summary);
+    setText("patentDetailEnglishTitle", patent.englishTitle);
+    setText(
+      "patentDetailApplicationNumber",
+      patent.applicationNumber
+    );
+    setText("patentDetailApplicationDate", patent.applicationDate);
+    setText("patentDetailInventors", patent.inventors);
+    setText("patentDetailOffice", patent.office);
+    setText("patentDetailCountry", patent.country);
+
+    detailImage.removeAttribute("src");
+    detailImage.alt = patent.title + " 도면";
+    showImagePlaceholder();
+
+    if (patent.image && patent.image.trim()) {
+      detailImage.hidden = false;
+      imagePlaceholder.hidden = true;
+      detailImage.src = patent.image;
+    }
+
+    if (!dialog.open) {
+      previousBodyOverflow = document.body.style.overflow;
+      dialog.showModal();
+      document.body.style.overflow = "hidden";
+    }
+
+    dialog.scrollTop = 0;
+    closeButton.focus();
+  }
+
+  PATENT_DATA.forEach(function(patent) {
+    const row = document.createElement("tr");
+    row.className = "patent-row";
+
+    const titleCell = document.createElement("td");
+    const titleButton = document.createElement("button");
+    titleButton.type = "button";
+    titleButton.className = "patent-title-button";
+    titleButton.textContent = patent.title;
+    titleButton.setAttribute("aria-haspopup", "dialog");
+    titleButton.setAttribute("aria-controls", "patentDialog");
+    titleCell.appendChild(titleButton);
+    row.appendChild(titleCell);
+
+    [
+      patent.patentNumber,
+      patent.applicationDate,
+      patent.country
+    ].forEach(function(value) {
+      const cell = document.createElement("td");
+      cell.textContent = value || "—";
+      row.appendChild(cell);
+    });
+
+    // 행 어디를 클릭해도 상세 정보 열기
+    // 제목 버튼은 Enter / Space 키로도 작동
+    row.addEventListener("click", function() {
+      openPatent(patent, titleButton);
+    });
+
+    tableBody.appendChild(row);
+  });
+
+  closeButton.addEventListener("click", function() {
+    dialog.close();
+  });
+
+  // 상세 창 바깥 배경을 클릭하면 닫기
+  dialog.addEventListener("click", function(event) {
+    if (event.target !== dialog) return;
+
+    const rect = dialog.getBoundingClientRect();
+    const outside =
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom;
+
+    if (outside) dialog.close();
+  });
+
+  // Esc 키 닫기는 dialog 기본 기능 사용
+  dialog.addEventListener("close", function() {
+    document.body.style.overflow = previousBodyOverflow;
+
+    if (
+      lastFocusedElement &&
+      lastFocusedElement.isConnected &&
+      lastFocusedElement.getClientRects().length
+    ) {
+      lastFocusedElement.focus();
+    }
+  });
+
+  window.addEventListener("hashchange", function() {
+    if (dialog.open) dialog.close();
+  });
+})();
+</script>
+<!-- ==================== /PATENTS ==================== -->
+    
 <section id="news" class="section light">
   <div class="container">
     <h2>INPL News</h2>
@@ -2482,13 +3090,14 @@ const match = typeOk && textOk;
 
   // ===== 단일페이지 라우팅: 메뉴별 전용 화면 =====
   const PAGES = {
-    home: ["home","welcome"],
-    professor: ["professor"],
-    people: ["people"],
-    research: ["research"],
-    publications: ["publications"],
-    news: ["news"]
-  };
+  home: ["home", "welcome"],
+  professor: ["professor"],
+  people: ["people"],
+  research: ["research"],
+  publications: ["publications"],
+  patents: ["patents"],
+  news: ["news"]
+};
 
   function pageFromHash(){
     const raw = (location.hash || '#home').replace('#','');
